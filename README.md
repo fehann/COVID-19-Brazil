@@ -7,15 +7,6 @@ slug: altair-interactive
 tags: covid19, coronavirus, brazil, python, altair, vega, interactive
 include: vega
 -->
-<html>
-<head>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@[VERSION]"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@[VERSION]"></script>
-  <!-- Import vega-embed -->
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@[VERSION]"></script>
-</head>
-</html>
 
 # Visualização de dados relacionados ao COVID-19 no Brasil
 Visando entender o comportamento da evolução da COVID-19 no Brasil, esta página apresenta o ritmo de aceleração ou desaceleração da doença por estado brasileiro. A inspiração para criação desta visualização veio a partir do gráfico publicado pela organização <a target="_blank" rel="noopener noreferrer" href="https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death">Our World in Data</a> que tem como objetivo apresentar não somente o número de casos mas também o ritmo no qual as morte estão ocorrendo.
