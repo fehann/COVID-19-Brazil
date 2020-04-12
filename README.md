@@ -36,7 +36,7 @@ O único tratamento nos dados originais foi o preenchimento dos números faltant
 ---
 
 - *Atualizado em: 12/04/2020*
-- *O notebook original para geração desta visualização pode ser acessado aqui: <a target="_blank" rel="noopener noreferrer" href="https://github.com/fehann/covid19brazil/blob/master/Covid19EstadosBrasileiros.ipynb">Jupyter Notebook</a> that was used to generate these examples.*
+- *O código original para geração desta visualização pode ser acessado aqui: <a target="_blank" rel="noopener noreferrer" href="https://github.com/fehann/COVID-19-Brazil/blob/master/covid19estadosbrasileiros.py">Python</a>.*
 - *Cuidem da saúde e da familia, colaborando vamos sair desta situação o mais breve possível.*
 
 
