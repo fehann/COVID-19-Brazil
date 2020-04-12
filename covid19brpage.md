@@ -45,6 +45,7 @@ O único tratamento nos dados originais foi o preenchimento de dados faltantes, 
 * [Brasil.io] (https://brasil.io/dataset/covid19/caso)
 * [Our World in Data] (https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death) 
 * [DataCamp Live Coding: Covid-19 Exploratory Data Analysis] (https://www.facebook.com/726282547396228/videos/861466570947781/)
+* [Altair: Interactive Plots on the Web] (https://matthewkudija.com/blog/2018/06/22/altair-interactive/)
 
 ---
 
