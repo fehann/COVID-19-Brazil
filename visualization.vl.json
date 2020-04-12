@@ -1,0 +1,1061 @@
+{
+  "config": {
+    "view": {
+      "continuousWidth": 400,
+      "continuousHeight": 300
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "opacity": 0.7,
+        "strokeWidth": 4
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "type": "nominal",
+            "field": "state",
+            "selection": "selector001"
+          },
+          "value": "lightgray"
+        },
+        "x": {
+          "type": "quantitative",
+          "field": "Day"
+        },
+        "y": {
+          "type": "quantitative",
+          "field": "Deaths",
+          "scale": {
+            "type": "log"
+          }
+        }
+      },
+      "height": 650,
+      "selection": {
+        "selector001": {
+          "type": "single",
+          "fields": [
+            "state"
+          ]
+        }
+      },
+      "title": "Total de mortes confirmadas pelo COVID-19 por estado brasileiros",
+      "width": 800
+    },
+    {
+      "mark": {
+        "type": "line",
+        "opacity": 0.7,
+        "strokeWidth": 4
+      },
+      "encoding": {
+        "color": {
+          "type": "nominal",
+          "field": "state"
+        },
+        "opacity": {
+          "value": 0.5
+        },
+        "tooltip": [
+          {
+            "type": "nominal",
+            "field": "state"
+          },
+          {
+            "type": "nominal",
+            "field": "Name"
+          }
+        ],
+        "x": {
+          "type": "quantitative",
+          "field": "Day"
+        },
+        "y": {
+          "type": "quantitative",
+          "field": "Deaths",
+          "scale": {
+            "type": "log"
+          }
+        }
+      },
+      "height": 650,
+      "title": "Total de mortes confirmadas pelo COVID-19 por estado brasileiros",
+      "transform": [
+        {
+          "filter": {
+            "selection": "selector001"
+          }
+        }
+      ],
+      "width": 800
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "size": 10
+      },
+      "encoding": {
+        "color": {
+          "type": "nominal",
+          "field": "state",
+          "legend": null
+        },
+        "text": {
+          "type": "nominal",
+          "field": "state"
+        },
+        "x": {
+          "type": "quantitative",
+          "aggregate": "max",
+          "axis": {
+            "title": "Dias a partir da 5a morte no estado"
+          },
+          "field": "Day"
+        },
+        "y": {
+          "type": "quantitative",
+          "aggregate": {
+            "argmax": "Day"
+          },
+          "axis": {
+            "title": "Mortes confirmadas (escala logarítmica)"
+          },
+          "field": "Deaths"
+        }
+      },
+      "height": 650,
+      "title": "Total de mortes confirmadas pelo COVID-19 por estado brasileiros",
+      "transform": [
+        {
+          "filter": {
+            "selection": "selector001"
+          }
+        }
+      ],
+      "width": 800
+    }
+  ],
+  "data": {
+    "name": "data-2079b35733fb188043099d79d010e65b"
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+  "datasets": {
+    "data-2079b35733fb188043099d79d010e65b": [
+      {
+        "Day": 0,
+        "state": "AM",
+        "Deaths": 7
+      },
+      {
+        "Day": 1,
+        "state": "AM",
+        "Deaths": 12
+      },
+      {
+        "Day": 2,
+        "state": "AM",
+        "Deaths": 15
+      },
+      {
+        "Day": 3,
+        "state": "AM",
+        "Deaths": 19
+      },
+      {
+        "Day": 4,
+        "state": "AM",
+        "Deaths": 23
+      },
+      {
+        "Day": 5,
+        "state": "AM",
+        "Deaths": 30
+      },
+      {
+        "Day": 6,
+        "state": "AM",
+        "Deaths": 40
+      },
+      {
+        "Day": 7,
+        "state": "AM",
+        "Deaths": 50
+      },
+      {
+        "Day": 8,
+        "state": "AM",
+        "Deaths": 50
+      },
+      {
+        "Day": 0,
+        "state": "BA",
+        "Deaths": 6
+      },
+      {
+        "Day": 1,
+        "state": "BA",
+        "Deaths": 7
+      },
+      {
+        "Day": 2,
+        "state": "BA",
+        "Deaths": 9
+      },
+      {
+        "Day": 3,
+        "state": "BA",
+        "Deaths": 10
+      },
+      {
+        "Day": 4,
+        "state": "BA",
+        "Deaths": 14
+      },
+      {
+        "Day": 5,
+        "state": "BA",
+        "Deaths": 18
+      },
+      {
+        "Day": 6,
+        "state": "BA",
+        "Deaths": 19
+      },
+      {
+        "Day": 7,
+        "state": "BA",
+        "Deaths": 19
+      },
+      {
+        "Day": 8,
+        "state": "BA",
+        "Deaths": 19
+      },
+      {
+        "Day": 0,
+        "state": "CE",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "CE",
+        "Deaths": 5
+      },
+      {
+        "Day": 2,
+        "state": "CE",
+        "Deaths": 7
+      },
+      {
+        "Day": 3,
+        "state": "CE",
+        "Deaths": 9
+      },
+      {
+        "Day": 4,
+        "state": "CE",
+        "Deaths": 21
+      },
+      {
+        "Day": 5,
+        "state": "CE",
+        "Deaths": 22
+      },
+      {
+        "Day": 6,
+        "state": "CE",
+        "Deaths": 23
+      },
+      {
+        "Day": 7,
+        "state": "CE",
+        "Deaths": 35
+      },
+      {
+        "Day": 8,
+        "state": "CE",
+        "Deaths": 35
+      },
+      {
+        "Day": 9,
+        "state": "CE",
+        "Deaths": 40
+      },
+      {
+        "Day": 10,
+        "state": "CE",
+        "Deaths": 57
+      },
+      {
+        "Day": 11,
+        "state": "CE",
+        "Deaths": 57
+      },
+      {
+        "Day": 12,
+        "state": "CE",
+        "Deaths": 57
+      },
+      {
+        "Day": 13,
+        "state": "CE",
+        "Deaths": 57
+      },
+      {
+        "Day": 0,
+        "state": "DF",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "DF",
+        "Deaths": 6
+      },
+      {
+        "Day": 2,
+        "state": "DF",
+        "Deaths": 7
+      },
+      {
+        "Day": 3,
+        "state": "DF",
+        "Deaths": 7
+      },
+      {
+        "Day": 4,
+        "state": "DF",
+        "Deaths": 10
+      },
+      {
+        "Day": 5,
+        "state": "DF",
+        "Deaths": 12
+      },
+      {
+        "Day": 6,
+        "state": "DF",
+        "Deaths": 12
+      },
+      {
+        "Day": 7,
+        "state": "DF",
+        "Deaths": 13
+      },
+      {
+        "Day": 8,
+        "state": "DF",
+        "Deaths": 13
+      },
+      {
+        "Day": 9,
+        "state": "DF",
+        "Deaths": 13
+      },
+      {
+        "Day": 0,
+        "state": "ES",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "ES",
+        "Deaths": 6
+      },
+      {
+        "Day": 2,
+        "state": "ES",
+        "Deaths": 6
+      },
+      {
+        "Day": 3,
+        "state": "ES",
+        "Deaths": 6
+      },
+      {
+        "Day": 4,
+        "state": "ES",
+        "Deaths": 6
+      },
+      {
+        "Day": 5,
+        "state": "ES",
+        "Deaths": 6
+      },
+      {
+        "Day": 6,
+        "state": "ES",
+        "Deaths": 7
+      },
+      {
+        "Day": 7,
+        "state": "ES",
+        "Deaths": 8
+      },
+      {
+        "Day": 8,
+        "state": "ES",
+        "Deaths": 8
+      },
+      {
+        "Day": 0,
+        "state": "GO",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "GO",
+        "Deaths": 5
+      },
+      {
+        "Day": 2,
+        "state": "GO",
+        "Deaths": 7
+      },
+      {
+        "Day": 3,
+        "state": "GO",
+        "Deaths": 7
+      },
+      {
+        "Day": 4,
+        "state": "GO",
+        "Deaths": 8
+      },
+      {
+        "Day": 5,
+        "state": "GO",
+        "Deaths": 8
+      },
+      {
+        "Day": 0,
+        "state": "MA",
+        "Deaths": 11
+      },
+      {
+        "Day": 1,
+        "state": "MA",
+        "Deaths": 12
+      },
+      {
+        "Day": 2,
+        "state": "MA",
+        "Deaths": 16
+      },
+      {
+        "Day": 3,
+        "state": "MA",
+        "Deaths": 21
+      },
+      {
+        "Day": 4,
+        "state": "MA",
+        "Deaths": 24
+      },
+      {
+        "Day": 0,
+        "state": "MG",
+        "Deaths": 6
+      },
+      {
+        "Day": 1,
+        "state": "MG",
+        "Deaths": 6
+      },
+      {
+        "Day": 2,
+        "state": "MG",
+        "Deaths": 6
+      },
+      {
+        "Day": 3,
+        "state": "MG",
+        "Deaths": 9
+      },
+      {
+        "Day": 4,
+        "state": "MG",
+        "Deaths": 11
+      },
+      {
+        "Day": 5,
+        "state": "MG",
+        "Deaths": 14
+      },
+      {
+        "Day": 6,
+        "state": "MG",
+        "Deaths": 15
+      },
+      {
+        "Day": 7,
+        "state": "MG",
+        "Deaths": 17
+      },
+      {
+        "Day": 8,
+        "state": "MG",
+        "Deaths": 17
+      },
+      {
+        "Day": 0,
+        "state": "PA",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "PA",
+        "Deaths": 5
+      },
+      {
+        "Day": 2,
+        "state": "PA",
+        "Deaths": 6
+      },
+      {
+        "Day": 3,
+        "state": "PA",
+        "Deaths": 7
+      },
+      {
+        "Day": 4,
+        "state": "PA",
+        "Deaths": 9
+      },
+      {
+        "Day": 5,
+        "state": "PA",
+        "Deaths": 9
+      },
+      {
+        "Day": 0,
+        "state": "PB",
+        "Deaths": 7
+      },
+      {
+        "Day": 1,
+        "state": "PB",
+        "Deaths": 11
+      },
+      {
+        "Day": 2,
+        "state": "PB",
+        "Deaths": 11
+      },
+      {
+        "Day": 3,
+        "state": "PB",
+        "Deaths": 11
+      },
+      {
+        "Day": 0,
+        "state": "PE",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "PE",
+        "Deaths": 5
+      },
+      {
+        "Day": 2,
+        "state": "PE",
+        "Deaths": 6
+      },
+      {
+        "Day": 3,
+        "state": "PE",
+        "Deaths": 6
+      },
+      {
+        "Day": 4,
+        "state": "PE",
+        "Deaths": 8
+      },
+      {
+        "Day": 5,
+        "state": "PE",
+        "Deaths": 9
+      },
+      {
+        "Day": 6,
+        "state": "PE",
+        "Deaths": 10
+      },
+      {
+        "Day": 7,
+        "state": "PE",
+        "Deaths": 14
+      },
+      {
+        "Day": 8,
+        "state": "PE",
+        "Deaths": 21
+      },
+      {
+        "Day": 9,
+        "state": "PE",
+        "Deaths": 30
+      },
+      {
+        "Day": 10,
+        "state": "PE",
+        "Deaths": 34
+      },
+      {
+        "Day": 11,
+        "state": "PE",
+        "Deaths": 46
+      },
+      {
+        "Day": 12,
+        "state": "PE",
+        "Deaths": 56
+      },
+      {
+        "Day": 13,
+        "state": "PE",
+        "Deaths": 65
+      },
+      {
+        "Day": 14,
+        "state": "PE",
+        "Deaths": 72
+      },
+      {
+        "Day": 0,
+        "state": "PI",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "PI",
+        "Deaths": 6
+      },
+      {
+        "Day": 2,
+        "state": "PI",
+        "Deaths": 7
+      },
+      {
+        "Day": 3,
+        "state": "PI",
+        "Deaths": 7
+      },
+      {
+        "Day": 4,
+        "state": "PI",
+        "Deaths": 7
+      },
+      {
+        "Day": 0,
+        "state": "PR",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "PR",
+        "Deaths": 7
+      },
+      {
+        "Day": 2,
+        "state": "PR",
+        "Deaths": 10
+      },
+      {
+        "Day": 3,
+        "state": "PR",
+        "Deaths": 14
+      },
+      {
+        "Day": 4,
+        "state": "PR",
+        "Deaths": 15
+      },
+      {
+        "Day": 5,
+        "state": "PR",
+        "Deaths": 17
+      },
+      {
+        "Day": 6,
+        "state": "PR",
+        "Deaths": 24
+      },
+      {
+        "Day": 7,
+        "state": "PR",
+        "Deaths": 26
+      },
+      {
+        "Day": 8,
+        "state": "PR",
+        "Deaths": 27
+      },
+      {
+        "Day": 0,
+        "state": "RJ",
+        "Deaths": 6
+      },
+      {
+        "Day": 1,
+        "state": "RJ",
+        "Deaths": 8
+      },
+      {
+        "Day": 2,
+        "state": "RJ",
+        "Deaths": 9
+      },
+      {
+        "Day": 3,
+        "state": "RJ",
+        "Deaths": 10
+      },
+      {
+        "Day": 4,
+        "state": "RJ",
+        "Deaths": 13
+      },
+      {
+        "Day": 5,
+        "state": "RJ",
+        "Deaths": 17
+      },
+      {
+        "Day": 6,
+        "state": "RJ",
+        "Deaths": 18
+      },
+      {
+        "Day": 7,
+        "state": "RJ",
+        "Deaths": 23
+      },
+      {
+        "Day": 8,
+        "state": "RJ",
+        "Deaths": 28
+      },
+      {
+        "Day": 9,
+        "state": "RJ",
+        "Deaths": 41
+      },
+      {
+        "Day": 10,
+        "state": "RJ",
+        "Deaths": 47
+      },
+      {
+        "Day": 11,
+        "state": "RJ",
+        "Deaths": 58
+      },
+      {
+        "Day": 12,
+        "state": "RJ",
+        "Deaths": 64
+      },
+      {
+        "Day": 13,
+        "state": "RJ",
+        "Deaths": 71
+      },
+      {
+        "Day": 14,
+        "state": "RJ",
+        "Deaths": 89
+      },
+      {
+        "Day": 15,
+        "state": "RJ",
+        "Deaths": 106
+      },
+      {
+        "Day": 16,
+        "state": "RJ",
+        "Deaths": 122
+      },
+      {
+        "Day": 17,
+        "state": "RJ",
+        "Deaths": 147
+      },
+      {
+        "Day": 18,
+        "state": "RJ",
+        "Deaths": 147
+      },
+      {
+        "Day": 0,
+        "state": "RN",
+        "Deaths": 6
+      },
+      {
+        "Day": 1,
+        "state": "RN",
+        "Deaths": 7
+      },
+      {
+        "Day": 2,
+        "state": "RN",
+        "Deaths": 7
+      },
+      {
+        "Day": 3,
+        "state": "RN",
+        "Deaths": 8
+      },
+      {
+        "Day": 4,
+        "state": "RN",
+        "Deaths": 11
+      },
+      {
+        "Day": 5,
+        "state": "RN",
+        "Deaths": 11
+      },
+      {
+        "Day": 6,
+        "state": "RN",
+        "Deaths": 11
+      },
+      {
+        "Day": 7,
+        "state": "RN",
+        "Deaths": 11
+      },
+      {
+        "Day": 0,
+        "state": "RS",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "RS",
+        "Deaths": 5
+      },
+      {
+        "Day": 2,
+        "state": "RS",
+        "Deaths": 6
+      },
+      {
+        "Day": 3,
+        "state": "RS",
+        "Deaths": 7
+      },
+      {
+        "Day": 4,
+        "state": "RS",
+        "Deaths": 7
+      },
+      {
+        "Day": 5,
+        "state": "RS",
+        "Deaths": 8
+      },
+      {
+        "Day": 6,
+        "state": "RS",
+        "Deaths": 8
+      },
+      {
+        "Day": 7,
+        "state": "RS",
+        "Deaths": 10
+      },
+      {
+        "Day": 8,
+        "state": "RS",
+        "Deaths": 14
+      },
+      {
+        "Day": 9,
+        "state": "RS",
+        "Deaths": 15
+      },
+      {
+        "Day": 10,
+        "state": "RS",
+        "Deaths": 15
+      },
+      {
+        "Day": 0,
+        "state": "SC",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "SC",
+        "Deaths": 5
+      },
+      {
+        "Day": 2,
+        "state": "SC",
+        "Deaths": 10
+      },
+      {
+        "Day": 3,
+        "state": "SC",
+        "Deaths": 10
+      },
+      {
+        "Day": 4,
+        "state": "SC",
+        "Deaths": 11
+      },
+      {
+        "Day": 5,
+        "state": "SC",
+        "Deaths": 15
+      },
+      {
+        "Day": 6,
+        "state": "SC",
+        "Deaths": 17
+      },
+      {
+        "Day": 7,
+        "state": "SC",
+        "Deaths": 18
+      },
+      {
+        "Day": 8,
+        "state": "SC",
+        "Deaths": 18
+      },
+      {
+        "Day": 9,
+        "state": "SC",
+        "Deaths": 21
+      },
+      {
+        "Day": 0,
+        "state": "SP",
+        "Deaths": 5
+      },
+      {
+        "Day": 1,
+        "state": "SP",
+        "Deaths": 9
+      },
+      {
+        "Day": 2,
+        "state": "SP",
+        "Deaths": 15
+      },
+      {
+        "Day": 3,
+        "state": "SP",
+        "Deaths": 22
+      },
+      {
+        "Day": 4,
+        "state": "SP",
+        "Deaths": 30
+      },
+      {
+        "Day": 5,
+        "state": "SP",
+        "Deaths": 40
+      },
+      {
+        "Day": 6,
+        "state": "SP",
+        "Deaths": 48
+      },
+      {
+        "Day": 7,
+        "state": "SP",
+        "Deaths": 58
+      },
+      {
+        "Day": 8,
+        "state": "SP",
+        "Deaths": 68
+      },
+      {
+        "Day": 9,
+        "state": "SP",
+        "Deaths": 84
+      },
+      {
+        "Day": 10,
+        "state": "SP",
+        "Deaths": 98
+      },
+      {
+        "Day": 11,
+        "state": "SP",
+        "Deaths": 113
+      },
+      {
+        "Day": 12,
+        "state": "SP",
+        "Deaths": 136
+      },
+      {
+        "Day": 13,
+        "state": "SP",
+        "Deaths": 164
+      },
+      {
+        "Day": 14,
+        "state": "SP",
+        "Deaths": 188
+      },
+      {
+        "Day": 15,
+        "state": "SP",
+        "Deaths": 219
+      },
+      {
+        "Day": 16,
+        "state": "SP",
+        "Deaths": 260
+      },
+      {
+        "Day": 17,
+        "state": "SP",
+        "Deaths": 275
+      },
+      {
+        "Day": 18,
+        "state": "SP",
+        "Deaths": 304
+      },
+      {
+        "Day": 19,
+        "state": "SP",
+        "Deaths": 371
+      },
+      {
+        "Day": 20,
+        "state": "SP",
+        "Deaths": 428
+      },
+      {
+        "Day": 21,
+        "state": "SP",
+        "Deaths": 496
+      },
+      {
+        "Day": 22,
+        "state": "SP",
+        "Deaths": 540
+      },
+      {
+        "Day": 23,
+        "state": "SP",
+        "Deaths": 560
+      }
+    ]
+  }
+}
