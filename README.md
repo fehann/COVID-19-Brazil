@@ -37,3 +37,11 @@ O único tratamento nos dados originais foi o preenchimento de dados faltantes, 
 
 - *O notebook original para geração desta visualização pode ser acessado aqui: <a target="_blank" rel="noopener noreferrer" href="https://github.com/fehann/covid19brazil/blob/master/Covid19EstadosBrasileiros.ipynb">Jupyter Notebook</a> that was used to generate these examples.*
 - *Cuidem da saúde e da familia, colaborando vamos sair desta situação o mais breve possível.*
+
+
+<!---
+Para atualizar o gráfico:
+1) Google Colab - rodar o notebook
+2) Salvar imagem em SVG e substituir no Github
+3) Abrir no editor do Vega Lite e copiar link para Github
+-->
