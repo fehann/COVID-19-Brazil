@@ -48,5 +48,5 @@ O único tratamento nos dados originais foi o preenchimento de dados faltantes, 
 
 ---
 
-- *You can view the original [Jupyter Notebook](https://github.com/mkudija/General-Examples/blob/master/Altair/Altair-interactive.ipynb) that was used to generate these examples.*
-- *All code examples in this notebook use Altair 2.1.0*
+- *O notebook original para para geração desta visualização pode ser acessado aqui: [Jupyter Notebook](https://github.com/fehann/covid19brazil/blob/master/Covid19EstadosBrasileiros.ipynb) that was used to generate these examples.*
+- *Cuidem da saúde e da familia, colaborando vamos sair desta situação o mais breve possível.*
