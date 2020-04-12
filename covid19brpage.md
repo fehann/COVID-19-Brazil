@@ -1,84 +1,19 @@
-title: Altair: Interactive Plots on the Web
-date: 2018-06-22 06:00
-authors: Matthew Kudija
+title: Covid-19 cases in Brazil
+date: 2020-04-12 06:00
+authors: Fernando Hannaka
 comments: true
 slug: altair-interactive
-tags: python, altair, vega, interactive
+tags: covid19, coronavirus, brazil, python, altair, vega, interactive
 include: vega
 
-**Contents**
 
-- [Intro to Altair](#intro-to-altair)
-- [Building Interactive Altair Charts](#building-interactive-altair-charts)
-- [Sharing Interactive Altair Charts on the Web](#sharing-interactive-altair-charts-on-the-web)
-- [Resources](#resources)
+# Visualização de dados relacionados ao COVID-19 no Brasil
+Visando entender o comportamento da evolução da COVID-19 no Brasil, esta página visa apresentar o ritmo de aceleração ou desaceleração da doença por estado brasileiro. A inspiração para criação desta visualização veio a partir do gráfico publicado pela organização [Our World in Data] (https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death) que visa apresentar não somente o número de casos mas também o ritmo no qual as morte estão ocorrendo.
 
-<!-- PELICAN_BEGIN_SUMMARY -->
+## Sobre os dados 
+É importante salientar que esta visualização está baseado em dados disponibilizados pelas secretarias estaduais, coletados de forma manual uma vez que não há um banco de dados integrados, conforme site [Brasil.io] (https://brasil.io/dataset/covid19/caso). São dados passível de erros e vieses portanto qualquer análise não deve ser baseada somente nestes dados e toda tomada de decisões deve haver uma análise científica com informações complementares.
 
-![alt]({filename}/images/altair-interactive.png)
-
-Adding interactivity to data visualizations can be helpful for better exploring the data and fun. Sharing interactive visualizations online extends the benefits to others. In this post I will show some examples of using the Altair library to create and share some simple interactive visualizations. The examples below are largely derived from the excellent Altair [gallery](https://altair-viz.github.io/gallery/index.html)—I claim no original work on these but enjoyed working with them to learn the mechanics of interactive visualization in Altair. 
-
-<!-- PELICAN_END_SUMMARY -->
-
-# Intro to Altair
-[Altair](https://altair-viz.github.io) is a visualization library for Python notable for taking a *declarative* approach based on a grammar of graphics using [Vega](https://vega.github.io/vega/) and [Vega-Lite](https://vega.github.io/vega-lite/). As Jake VanderPlas explains when presenting Altair, this allows visualization *concepts* to map directly to visualization *implementation*. 
-
-Instead of imperatively specifying *how* to render the visualization as in matplotlib, with Altair (and vega/vega-lite) you specify *what* to visualize. This approach makes for rapid exploration of your data and iteration between chart types.
-
-
-Every Altair chart is made up of **Data**, **Marks**, and **Encodings**, which can be modified with **Binning and Aggregation**. Given a simple dataset with columns of `x` and `y` we can define a barebones Altair chart like this:
-
-```python
-alt.Chart(data).mark_point().encode(
-    x='x:Q',
-    y='mean(y)',
-)
-```
-
-A quick summary of the properties available is given in the table below, with links to the Altair documentation of the corresponding section:
-
-| [\| Marks \|](https://altair-viz.github.io/user_guide/marks.html) | [\| Encodings \|](https://altair-viz.github.io/user_guide/encoding.html) | [\| Data Types \|](https://altair-viz.github.io/user_guide/encoding.html#data-types) | [\| Binning & Aggregation \|](https://altair-viz.github.io/user_guide/encoding.html#binning-and-aggregation) | 
-| :---: | :---: | :---: | :---: | 
-| `mark_area`  | `x`: x-axis value | `:Q` Quantitative | `average` | 
-| `mark_bar` | `y`: y-axis value| `:N` Nominal| `average`|
-| `mark_circle` | `color`| `:O` Ordinal| `sum`|
-| `mark_geoshape` | `opacity`| `:T` Temporal| `count`|
-| `mark_line` | `shape`| | `distinct`|
-| `mark_point` | `size`| | `max`|
-| `mark_rect` | `row`| | `q1`/`q3`|
-| `mark_rule` | `column`| | `ci0`/`ci1`|
-| `mark_square` | `tooltip`| | etc...|
-| `mark_text` | etc...| | |
-| `mark_tick` | | | |
-| `mark_trail` | | | |
-
-<br>
-
-Altair is well-documented with many helpful examples—see the [resources](#resources) at the bottom of this page for links to more information.
-
-
-# Building Interactive Altair Charts
-
-Next I'll walk through several examples of interactive Altair charts. These are also available in the original [Jupyter Notebook](https://github.com/mkudija/General-Examples/blob/master/Altair/Altair-interactive.ipynb). Note that the interactivity is best supported by viewing this on a laptop rather than mobile.
-
-## Cars Example
-
-We'll start with a basic static scatter plot showing the relationship between Horsepower and Gas Mileage for a number of cars. Again we simply specify the data (along with data types for each value denoted by `:Q` in this case), chart type, and encoding.
-
-```python
-import altair as alt
-from vega_datasets import data
-
-cars = data.cars.url
-
-alt.Chart(cars).mark_point().encode(
-    x='Horsepower:Q',
-    y='Miles_per_Gallon:Q',
-)
-```
-
-The result is a familiar scatter plot. 
+## Número de mortes por estado brasileiro a partir da 5a morte notificada
 
 <div id="vis00"></div>
 <script type="text/javascript">
@@ -102,7 +37,14 @@ vegaEmbed("#vis00", spec00, embed_opt00)
 
 
 
-Then we add in some interactivity, including tooltips and a selectable legend, which was inspired by [Jake VanderPlas' PyCon 2018 tutorial](https://www.youtube.com/watch?v=ms29ZPUKxbU):
+## Considerações
+O único tratamento nos dados originais foi o preenchimento de dados faltantes, provavelmente devido a falta de disponibilidade do dado pela secretaria em determinado dia, porém é algo que não acontece com frequência. Os dados pendentes foram preenchidos com o mesmo total de casos de mortes válido para aquele estado. Normalmente estes dados faltantes ocorrem nos dias mais recentes portanto para fins de visualização não foram considerados os últimos 3 dias, para permitir a obtenção completa dos dados antes de serem apresentados. Como o intuito deste gráfico é mostrar a tendência é importante termos os dados completos para não tirarmos conclusões precipitadas.
+
+## Referências
+
+* [Brasil.io] (https://brasil.io/dataset/covid19/caso)
+* [Our World in Data] (https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death) 
+* [DataCamp Live Coding: Covid-19 Exploratory Data Analysis] (https://www.facebook.com/726282547396228/videos/861466570947781/)
 
 ```python
 import altair as alt
