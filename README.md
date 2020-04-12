@@ -9,10 +9,10 @@ include: vega
 -->
 
 # Visualização de dados relacionados ao COVID-19 no Brasil
-Visando entender o comportamento da evolução da COVID-19 no Brasil, esta página apresenta o ritmo de aceleração ou desaceleração da doença por estado brasileiro. A inspiração para criação desta visualização veio a partir do gráfico publicado pela organização [Our World in Data] (https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death) que tem como objetivo apresentar não somente o número de casos mas também o ritmo no qual as morte estão ocorrendo.
+Visando entender o comportamento da evolução da COVID-19 no Brasil, esta página apresenta o ritmo de aceleração ou desaceleração da doença por estado brasileiro. A inspiração para criação desta visualização veio a partir do gráfico publicado pela organização <a target="_blank" rel="noopener noreferrer" href="https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death">Our World in Data</a> que tem como objetivo apresentar não somente o número de casos mas também o ritmo no qual as morte estão ocorrendo.
 
 ## Sobre os dados 
-É importante salientar que esta visualização está baseado em dados disponibilizados pelas secretarias estaduais, coletados de forma manual uma vez que não há um banco de dados integrados, conforme site [Brasil.io] (https://brasil.io/dataset/covid19/caso). São dados passível de erros e vieses portanto qualquer análise não deve ser baseada somente nestes dados e toda tomada de decisões deve considerar uma análise científica com informações complementares.
+É importante salientar que esta visualização está baseado em dados disponibilizados pelas secretarias estaduais, coletados de forma manual uma vez que não há um banco de dados integrados, conforme site <a target="_blank" rel="noopener noreferrer" href="https://brasil.io/dataset/covid19/caso">Brasil.io</a>. São dados passível de erros e vieses portanto qualquer análise não deve ser baseada somente nestes dados e toda tomada de decisões deve considerar uma análise científica com informações complementares.
 
 ## Número de mortes por estado brasileiro a partir da 5a morte notificada
 <img 
@@ -28,12 +28,12 @@ O único tratamento nos dados originais foi o preenchimento de dados faltantes, 
 
 ## Referências
 
-* [Brasil.io] (https://brasil.io/dataset/covid19/caso)
-* [Our World in Data] (https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death) 
-* [DataCamp Live Coding: Covid-19 Exploratory Data Analysis] (https://www.facebook.com/726282547396228/videos/861466570947781/)
-* [Altair: Interactive Plots on the Web] (https://matthewkudija.com/blog/2018/06/22/altair-interactive/)
+* <a target="_blank" rel="noopener noreferrer" href="https://brasil.io/dataset/covid19/caso">Brasil.io</a>
+* <a target="_blank" rel="noopener noreferrer" href="https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death">Our World in Data</a>
+* <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/726282547396228/videos/861466570947781/">DataCamp Live Coding: Covid-19 Exploratory Data Analysis</a>
+* <a target="_blank" rel="noopener noreferrer" href="https://matthewkudija.com/blog/2018/06/22/altair-interactive/">Altair: Interactive Plots on the Web</a>
 
 ---
 
-- *O notebook original para geração desta visualização pode ser acessado aqui: [Jupyter Notebook](https://github.com/fehann/covid19brazil/blob/master/Covid19EstadosBrasileiros.ipynb) that was used to generate these examples.*
+- *O notebook original para geração desta visualização pode ser acessado aqui: <a target="_blank" rel="noopener noreferrer" href="https://github.com/fehann/covid19brazil/blob/master/Covid19EstadosBrasileiros.ipynb">Jupyter Notebook</a> that was used to generate these examples.*
 - *Cuidem da saúde e da familia, colaborando vamos sair desta situação o mais breve possível.*
