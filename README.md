@@ -1,7 +1,3 @@
-[![COVID-19 no Brasil](visualization.svg)][MultipleTopLevelVIsDemoLink]
-
-[COVID19noBrasil]: https://fehann.github.io/COVID-19-Brazil/
-
 # Visualização de dados relacionados ao COVID-19 no Brasil
 Visando entender o comportamento da evolução da COVID-19 no Brasil, esta página apresenta o ritmo de aceleração ou desaceleração da doença por estado brasileiro. A inspiração para criação desta visualização veio a partir do gráfico publicado pela organização <a target="_blank" rel="noopener noreferrer" href="https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death">Our World in Data</a> que tem como objetivo apresentar não somente o número de casos mas também o ritmo no qual as morte estão ocorrendo.
 
