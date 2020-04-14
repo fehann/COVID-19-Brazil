@@ -1,1 +1,9 @@
 theme: jekyll-theme-cayman
+title: Covid-19 cases in Brazil
+date: 2020-04-12 06:00
+authors: Fernando Hannaka
+comments: true
+slug: altair-interactive
+tags: covid19, coronavirus, brazil, python, altair, vega, interactive
+include: vega
+google_analytics: UA-163459825-1
