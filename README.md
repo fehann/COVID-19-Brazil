@@ -1,4 +1,4 @@
-<!---
+---
 title: Covid-19 cases in Brazil
 date: 2020-04-12 06:00
 authors: Fernando Hannaka
@@ -6,7 +6,20 @@ comments: true
 slug: altair-interactive
 tags: covid19, coronavirus, brazil, python, altair, vega, interactive
 include: vega
--->
+---
+
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163459825-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163459825-1');
+</script>
+</head>
+
 
 # Visualização de dados relacionados ao COVID-19 no Brasil
 Visando entender o comportamento da evolução da COVID-19 no Brasil, esta página apresenta o ritmo de aceleração ou desaceleração da doença por estado brasileiro. A inspiração para criação desta visualização veio a partir do gráfico publicado pela organização <a target="_blank" rel="noopener noreferrer" href="https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death">Our World in Data</a> que tem como objetivo apresentar não somente o número de casos mas também o ritmo no qual as morte estão ocorrendo.
