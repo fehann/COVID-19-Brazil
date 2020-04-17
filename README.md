@@ -11,8 +11,7 @@ Visando entender o comportamento da evolução da COVID-19 no Brasil, esta pági
 <img 
     src="visualization.svg" 
     alt="Mortes por estado brasileiro"
-    height="600"
-    width="1000" />
+ />
 
 ## Considerações
 O único tratamento nos dados originais foi o preenchimento dos números faltantes, provavelmente devido à falta de disponibilidade de informação oficial pela secretaria em um determinado dia, porém não acontece com frequência. Os dados pendentes foram preenchidos com o mesmo número total de mortes válido antes daquele dia para aquele estado. Normalmente esta lacuna ocorre nos dias mais recentes portanto, para fins de visualização, não foram considerados os últimos 2 dias. Como o intuito deste gráfico é mostrar a tendência é importante termos os dados completos para não tirarmos conclusões precipitadas.
@@ -37,4 +36,6 @@ Para atualizar o gráfico:
 1) Google Colab - rodar o notebook
 2) Salvar imagem em SVG e substituir no Github
 3) Abrir no editor do Vega Lite e copiar link para Github
+    height="600"
+    width="1000"
 -->
