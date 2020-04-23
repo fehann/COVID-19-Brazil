@@ -1,9 +1,11 @@
 include: vega
 theme: jekyll-theme-cayman
-title: Covid-19 cases in Brazil
+title: Covid-19 visualização de casos no Brasil
+description: Visualização de dados relacionadas a velocidade das ocorrências de mortes relacionadas ao Covid-19 por estado brasileiro
 date: 2020-04-12 06:00
 authors: Fernando Hannaka
 comments: true
 slug: altair-interactive
-tags: covid19, coronavirus, brazil, python, altair, vega, interactive
+tags: covid19, coronavirus, mortes, brasil, estados brasileiros, brazil, duplicam
 google_analytics: UA-163459825-1
+{% include "https://www.linkedin.com/posts/activity-6657331106443993088-V7Lm" %}
