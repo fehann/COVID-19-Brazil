@@ -38,7 +38,7 @@ O único tratamento nos dados originais foi o preenchimento dos números faltant
 
 - *Atualizado em: 22/04/2020*
 - *O código original para geração desta visualização pode ser acessado aqui: <a target="_blank" rel="noopener noreferrer" href="https://github.com/fehann/COVID-19-Brazil/blob/master/Covid19EstadosBrasileiros.ipynb">Jupyter Notebook</a>.*
-- *Em caso de dúvidas, comentários ou sugestões podem entrar em contato através do email fhannaka@hotmail.com*
+- *Em caso de dúvidas, comentários ou sugestões podem entrar em contato através do <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/posts/activity-6657331106443993088-V7Lm">LinkedIn</a>
 - *Cuidem da saúde e da familia, colaborando vamos sair desta situação o mais breve possível.*
 
 
