@@ -1,5 +1,4 @@
 # COVID19 Brazil
-getwd()
 
 # Load libraries
 install.packages("remotes")
@@ -49,16 +48,7 @@ dados2 <- merge(dados, date5thdeath, by = "state")
 
 dados2 <- mutate(dados2, datesince5thdeath = as.numeric(date - date5thdeath))
 
-# method 1
-dados2 %>%
-  filter(datesince5thdeath > -1, !is.na(date5thdeath), between(datesince5thdeath, 0, max(na.omit(datesince5thdeath))-2)) %>%
-  ggplot(aes(datesince5thdeath, deaths, group = state, color = state)) +
-  geom_line() + geom_point() + scale_y_continuous(trans = 'log2') +
-  geom_dl(aes(label = state), method = list(dl.combine("first.points", "last.points"), cex = 0.8)) +
-  theme(legend.position = "above") + labs(title = "COVID 19 Total deaths by brazilian states")
-ggplotly()
-
-# method 2
+# Visualização
 dados2 %>%
   filter(datesince5thdeath > -1, !is.na(date5thdeath), between(datesince5thdeath, 0, max(na.omit(datesince5thdeath))-2)) %>% # disregard last 2 observations and any NAs
   plot_ly(x = ~datesince5thdeath, y = ~deaths, color = ~state, hoverinfo = "text", 
