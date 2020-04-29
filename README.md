@@ -33,6 +33,7 @@ O único tratamento nos dados originais foi o preenchimento dos números faltant
 * <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/726282547396228/videos/861466570947781/">DataCamp Live Coding: Covid-19 Exploratory Data Analysis</a>
 * <a target="_blank" rel="noopener noreferrer" href="https://matthewkudija.com/blog/2018/06/22/altair-interactive/">Altair: Interactive Plots on the Web</a>
 * <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Doubling_time">Doubling time</a>
+* <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=O-3Mlj3MQ_Q&feature=share">How coronavirus charts can mislead us</a>
 
 ---
 
