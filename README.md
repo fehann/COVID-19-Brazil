@@ -4,8 +4,8 @@ Visando entender o comportamento da evolução da COVID-19 no Brasil, esta pági
 ## Sobre os dados 
 É importante salientar que esta visualização se baseia em dados disponibilizados pelas secretarias estaduais, coletados de forma manual uma vez que não há um banco de dados integrados, conforme site <a target="_blank" rel="noopener noreferrer" href="https://brasil.io/dataset/covid19/caso">Brasil.io</a>. São dados passível de erros e vieses portanto qualquer análise não deve ser baseada somente nestes dados e toda tomada de decisões deve considerar uma análise científica com informações complementares.
 
-@[vega-lite](https://data.world/example.vl.json)
-@[vega](https://data.world/example.vg.json)
+@[vega-lite](visualization.vl.json)
+@[vega](visualization.vl.json)
 
 ## Número de mortes por estado brasileiro a partir da 5a morte notificada
 
