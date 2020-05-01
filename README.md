@@ -50,9 +50,18 @@ Para atualizar o gráfico:
 3) Abrir no editor do Vega Lite e copiar link para Github
     height="600"
     width="1000"
-
+@[vega-lite](visualization.vl.json)
+@[vega](visualization.vl.json)
 
 -->
 
-@[vega-lite](visualization.vl.json)
-@[vega](visualization.vl.json)
+
+
+<div id="vis"></div>
+
+<script type="text/javascript">
+  var spec = "visualization.vl.json";
+  vegaEmbed('#vis', spec).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+</script>
