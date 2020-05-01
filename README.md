@@ -56,12 +56,8 @@ Para atualizar o gráfico:
 -->
 
 
-
-<div id="vis"></div>
-
-<script type="text/javascript">
-  var spec = "visualization.vl.json";
-  vegaEmbed('#vis', spec).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+```vega-lite
+{
+  "$schema": "visualization.vl.json",
+}
+```
