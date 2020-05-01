@@ -1,4 +1,4 @@
-include: vega
+include: vega-lite
 theme: jekyll-theme-cayman
 title: Covid-19 visualização de casos no Brasil
 description: Visualização de dados relacionadas a velocidade das ocorrências de mortes relacionadas ao Covid-19 por estado brasileiro
