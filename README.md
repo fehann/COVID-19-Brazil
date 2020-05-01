@@ -50,8 +50,9 @@ Para atualizar o gráfico:
 3) Abrir no editor do Vega Lite e copiar link para Github
     height="600"
     width="1000"
-@[vega-lite](visualization.vl.json)
-@[vega](visualization.vl.json)
+
 
 -->
 
+@[vega-lite](visualization.vl.json)
+@[vega](visualization.vl.json)
