@@ -4,9 +4,6 @@ Visando entender o comportamento da evolução da COVID-19 no Brasil, esta pági
 ## Sobre os dados 
 É importante salientar que esta visualização se baseia em dados disponibilizados pelas secretarias estaduais, coletados de forma manual uma vez que não há um banco de dados integrados, conforme site <a target="_blank" rel="noopener noreferrer" href="https://brasil.io/dataset/covid19/caso">Brasil.io</a>. São dados passível de erros e vieses portanto qualquer análise não deve ser baseada somente nestes dados e toda tomada de decisões deve considerar uma análise científica com informações complementares.
 
-@[vega-lite](visualization.vl.json)
-@[vega](visualization.vl.json)
-
 ## Número de mortes por estado brasileiro a partir da 5a morte notificada
 
 <img 
@@ -53,4 +50,4874 @@ Para atualizar o gráfico:
 3) Abrir no editor do Vega Lite e copiar link para Github
     height="600"
     width="1000"
+@[vega-lite](visualization.vl.json)
+@[vega](visualization.vl.json)
+
 -->
+
+```vega-lite
+{
+  "config": {
+    "view": {"continuousWidth": 400, "continuousHeight": 300},
+    "axis": {"labelFontSize": 13, "titleFontSize": 13},
+    "title": {"fontSize": 13}
+  },
+  "hconcat": [
+    {
+      "layer": [
+        {
+          "data": {"name": "data-ec0d3bc73906ead16c657b457e25fc30"},
+          "mark": {"type": "line", "opacity": 0.7, "strokeWidth": 4},
+          "encoding": {
+            "color": {
+              "condition": {
+                "type": "nominal",
+                "field": "state",
+                "selection": "selector004"
+              },
+              "value": "lightgray"
+            },
+            "tooltip": [
+              {"type": "nominal", "field": "state"},
+              {"type": "nominal", "field": "Date", "timeUnit": "yearmonthdate"},
+              {"type": "nominal", "field": "Deaths"}
+            ],
+            "x": {"type": "quantitative", "field": "Day"},
+            "y": {
+              "type": "quantitative",
+              "field": "Deaths",
+              "scale": {"type": "log"}
+            }
+          },
+          "selection": {"selector004": {"type": "single", "fields": ["state"]}},
+          "title": "Total de mortes confirmadas pelo COVID-19 por estado brasileiro"
+        },
+        {
+          "data": {"name": "data-ec0d3bc73906ead16c657b457e25fc30"},
+          "mark": {"type": "line", "opacity": 0.7, "strokeWidth": 4},
+          "encoding": {
+            "color": {"type": "nominal", "field": "state"},
+            "opacity": {"value": 0.5},
+            "x": {"type": "quantitative", "field": "Day"},
+            "y": {
+              "type": "quantitative",
+              "field": "Deaths",
+              "scale": {"type": "log"}
+            }
+          },
+          "title": "Total de mortes confirmadas pelo COVID-19 por estado brasileiro",
+          "transform": [{"filter": {"selection": "selector004"}}]
+        },
+        {
+          "data": {"name": "data-ec0d3bc73906ead16c657b457e25fc30"},
+          "mark": {"type": "text", "align": "left", "dx": 5, "size": 15},
+          "encoding": {
+            "color": {"type": "nominal", "field": "state", "legend": null},
+            "text": {"type": "nominal", "field": "state"},
+            "x": {
+              "type": "quantitative",
+              "aggregate": "max",
+              "axis": {"title": "Dias a partir da 5a morte no estado"},
+              "field": "Day"
+            },
+            "y": {
+              "type": "quantitative",
+              "aggregate": {"argmax": "Day"},
+              "axis": {"title": "Mortes (escala logarítmica)"},
+              "field": "Deaths"
+            }
+          },
+          "title": "Total de mortes confirmadas pelo COVID-19 por estado brasileiro",
+          "transform": [{"filter": {"selection": "selector004"}}]
+        },
+        {
+          "data": {"sequence": {"start": 0, "stop": 19, "step": 1, "as": "x"}},
+          "mark": {"type": "line", "strokeDash": [2, 2]},
+          "encoding": {
+            "color": {"value": "lightgray"},
+            "x": {"type": "quantitative", "field": "x"},
+            "y": {"type": "quantitative", "field": "value"}
+          },
+          "transform": [
+            {"calculate": "5*pow(2,(datum.x/2))", "as": "double2"},
+            {"fold": ["double2"]}
+          ]
+        },
+        {
+          "data": {"sequence": {"start": 0, "stop": 41, "step": 1, "as": "x"}},
+          "mark": {"type": "line", "strokeDash": [2, 2]},
+          "encoding": {
+            "color": {"value": "lightgray"},
+            "x": {"type": "quantitative", "field": "x"},
+            "y": {"type": "quantitative", "field": "value"}
+          },
+          "transform": [
+            {"calculate": "5*pow(2,(datum.x/5))", "as": "double5"},
+            {"fold": ["double5"]}
+          ]
+        },
+        {
+          "data": {"sequence": {"start": 0, "stop": 41, "step": 1, "as": "x"}},
+          "mark": {"type": "line", "strokeDash": [2, 2]},
+          "encoding": {
+            "color": {"value": "lightgray"},
+            "x": {"type": "quantitative", "field": "x"},
+            "y": {"type": "quantitative", "field": "value"}
+          },
+          "transform": [
+            {"calculate": "5*pow(2,(datum.x/10))", "as": "double10"},
+            {"fold": ["double10"]}
+          ]
+        },
+        {
+          "data": {"name": "data-bf3a284e2fbb064d7dde36f27f5d5a49"},
+          "mark": {
+            "type": "text",
+            "angle": 296,
+            "color": "gray",
+            "size": 10,
+            "text": "mortes duplicam a cada 2 dias"
+          },
+          "encoding": {
+            "x": {"type": "quantitative", "field": "x"},
+            "y": {"type": "quantitative", "field": "y"}
+          }
+        },
+        {
+          "data": {"name": "data-91a6abd35c00440d3f0d2923267a6aad"},
+          "mark": {
+            "type": "text",
+            "angle": 323,
+            "color": "gray",
+            "size": 10,
+            "text": "a cada 5 dias"
+          },
+          "encoding": {
+            "x": {"type": "quantitative", "field": "x"},
+            "y": {"type": "quantitative", "field": "y"}
+          }
+        },
+        {
+          "data": {"name": "data-05f954e2ff594c6e76a66044f332be7c"},
+          "mark": {
+            "type": "text",
+            "angle": 337,
+            "color": "gray",
+            "size": 10,
+            "text": "a cada 10 dias"
+          },
+          "encoding": {
+            "x": {"type": "quantitative", "field": "x"},
+            "y": {"type": "quantitative", "field": "y"}
+          }
+        }
+      ],
+      "height": 500,
+      "width": 350
+    },
+    {
+      "layer": [
+        {
+          "layer": [
+            {
+              "mark": {"type": "line", "opacity": 0.7, "strokeWidth": 4},
+              "encoding": {
+                "color": {
+                  "condition": {
+                    "type": "nominal",
+                    "field": "state",
+                    "selection": "selector004"
+                  },
+                  "value": "lightgray"
+                },
+                "tooltip": [
+                  {"type": "nominal", "field": "state"},
+                  {
+                    "type": "nominal",
+                    "field": "Date",
+                    "timeUnit": "yearmonthdate"
+                  },
+                  {"type": "nominal", "field": "Deaths"}
+                ],
+                "x": {"type": "quantitative", "field": "Day"},
+                "y": {"type": "quantitative", "field": "DeathPop"}
+              },
+              "selection": {
+                "selector004": {"type": "single", "fields": ["state"]}
+              },
+              "title": "Mortes confirmadas pelo COVID-19 a cada 100 mil habitantes"
+            },
+            {
+              "mark": {"type": "line", "opacity": 0.7, "strokeWidth": 4},
+              "encoding": {
+                "color": {"type": "nominal", "field": "state"},
+                "opacity": {"value": 0.5},
+                "x": {"type": "quantitative", "field": "Day"},
+                "y": {"type": "quantitative", "field": "DeathPop"}
+              },
+              "title": "Mortes confirmadas pelo COVID-19 a cada 100 mil habitantes",
+              "transform": [{"filter": {"selection": "selector004"}}]
+            },
+            {
+              "mark": {"type": "text", "align": "left", "dx": 5, "size": 15},
+              "encoding": {
+                "color": {"type": "nominal", "field": "state", "legend": null},
+                "text": {"type": "nominal", "field": "state"},
+                "x": {
+                  "type": "quantitative",
+                  "aggregate": "max",
+                  "axis": {"title": "Dias a partir da 5a morte no estado"},
+                  "field": "Day"
+                },
+                "y": {
+                  "type": "quantitative",
+                  "aggregate": {"argmax": "Day"},
+                  "axis": {"title": "Mortes a cada 100 mil habitantes"},
+                  "field": "DeathPop"
+                }
+              },
+              "title": "Mortes confirmadas pelo COVID-19 a cada 100 mil habitantes",
+              "transform": [{"filter": {"selection": "selector004"}}]
+            }
+          ]
+        }
+      ],
+      "data": {"name": "data-ec0d3bc73906ead16c657b457e25fc30"},
+      "height": 500,
+      "width": 350
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+  "datasets": {
+    "data-ec0d3bc73906ead16c657b457e25fc30": [
+      {
+        "Day": 0,
+        "state": "AC",
+        "Deaths": 5,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 0.5669352049754233
+      },
+      {
+        "Day": 1,
+        "state": "AC",
+        "Deaths": 5,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 0.5669352049754233
+      },
+      {
+        "Day": 2,
+        "state": "AC",
+        "Deaths": 6,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 0.680322245970508
+      },
+      {
+        "Day": 3,
+        "state": "AC",
+        "Deaths": 6,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 0.680322245970508
+      },
+      {
+        "Day": 4,
+        "state": "AC",
+        "Deaths": 8,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 0.9070963279606774
+      },
+      {
+        "Day": 5,
+        "state": "AC",
+        "Deaths": 8,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 0.9070963279606774
+      },
+      {
+        "Day": 6,
+        "state": "AC",
+        "Deaths": 8,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 0.9070963279606774
+      },
+      {
+        "Day": 7,
+        "state": "AC",
+        "Deaths": 10,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 1.1338704099508465
+      },
+      {
+        "Day": 8,
+        "state": "AC",
+        "Deaths": 11,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 1.2472574509459313
+      },
+      {
+        "Day": 9,
+        "state": "AC",
+        "Deaths": 11,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 1.2472574509459313
+      },
+      {
+        "Day": 10,
+        "state": "AC",
+        "Deaths": 11,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 1.2472574509459313
+      },
+      {
+        "Day": 11,
+        "state": "AC",
+        "Deaths": 14,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 1.5874185739311855
+      },
+      {
+        "Day": 12,
+        "state": "AC",
+        "Deaths": 16,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 881935,
+        "DeathPop": 1.8141926559213548
+      },
+      {
+        "Day": 0,
+        "state": "AL",
+        "Deaths": 5,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.1498191533000515
+      },
+      {
+        "Day": 1,
+        "state": "AL",
+        "Deaths": 5,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.1498191533000515
+      },
+      {
+        "Day": 2,
+        "state": "AL",
+        "Deaths": 7,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.2097468146200721
+      },
+      {
+        "Day": 3,
+        "state": "AL",
+        "Deaths": 10,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.299638306600103
+      },
+      {
+        "Day": 4,
+        "state": "AL",
+        "Deaths": 15,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.4494574599001545
+      },
+      {
+        "Day": 5,
+        "state": "AL",
+        "Deaths": 18,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.5393489518801854
+      },
+      {
+        "Day": 6,
+        "state": "AL",
+        "Deaths": 19,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.5693127825401957
+      },
+      {
+        "Day": 7,
+        "state": "AL",
+        "Deaths": 20,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.599276613200206
+      },
+      {
+        "Day": 8,
+        "state": "AL",
+        "Deaths": 22,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.6592042745202267
+      },
+      {
+        "Day": 9,
+        "state": "AL",
+        "Deaths": 27,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.8090234278202781
+      },
+      {
+        "Day": 10,
+        "state": "AL",
+        "Deaths": 29,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.8689510891402987
+      },
+      {
+        "Day": 11,
+        "state": "AL",
+        "Deaths": 32,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 0.9588425811203297
+      },
+      {
+        "Day": 12,
+        "state": "AL",
+        "Deaths": 34,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 1.0187702424403502
+      },
+      {
+        "Day": 13,
+        "state": "AL",
+        "Deaths": 36,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 3337357,
+        "DeathPop": 1.0786979037603708
+      },
+      {
+        "Day": 0,
+        "state": "AM",
+        "Deaths": 7,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 0.16889458733864837
+      },
+      {
+        "Day": 1,
+        "state": "AM",
+        "Deaths": 12,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 0.2895335782948258
+      },
+      {
+        "Day": 2,
+        "state": "AM",
+        "Deaths": 15,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 0.3619169728685322
+      },
+      {
+        "Day": 3,
+        "state": "AM",
+        "Deaths": 19,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 0.4584281656334741
+      },
+      {
+        "Day": 4,
+        "state": "AM",
+        "Deaths": 23,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 0.554939358398416
+      },
+      {
+        "Day": 5,
+        "state": "AM",
+        "Deaths": 30,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 0.7238339457370644
+      },
+      {
+        "Day": 6,
+        "state": "AM",
+        "Deaths": 40,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 0.9651119276494192
+      },
+      {
+        "Day": 7,
+        "state": "AM",
+        "Deaths": 50,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 1.206389909561774
+      },
+      {
+        "Day": 8,
+        "state": "AM",
+        "Deaths": 53,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 1.2787733041354805
+      },
+      {
+        "Day": 9,
+        "state": "AM",
+        "Deaths": 62,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 1.4959234878566
+      },
+      {
+        "Day": 10,
+        "state": "AM",
+        "Deaths": 71,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 1.7130736715777193
+      },
+      {
+        "Day": 11,
+        "state": "AM",
+        "Deaths": 90,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 2.1715018372111934
+      },
+      {
+        "Day": 12,
+        "state": "AM",
+        "Deaths": 106,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 2.557546608270961
+      },
+      {
+        "Day": 13,
+        "state": "AM",
+        "Deaths": 124,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 2.9918469757132
+      },
+      {
+        "Day": 14,
+        "state": "AM",
+        "Deaths": 145,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 3.4985307377291446
+      },
+      {
+        "Day": 15,
+        "state": "AM",
+        "Deaths": 161,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 3.8845755087889127
+      },
+      {
+        "Day": 16,
+        "state": "AM",
+        "Deaths": 182,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 4.3912592708048575
+      },
+      {
+        "Day": 17,
+        "state": "AM",
+        "Deaths": 185,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 4.463642665378564
+      },
+      {
+        "Day": 18,
+        "state": "AM",
+        "Deaths": 193,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 4.656665050908448
+      },
+      {
+        "Day": 19,
+        "state": "AM",
+        "Deaths": 206,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 4.970326427394509
+      },
+      {
+        "Day": 20,
+        "state": "AM",
+        "Deaths": 234,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 5.645904776749102
+      },
+      {
+        "Day": 21,
+        "state": "AM",
+        "Deaths": 255,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 6.152588538765047
+      },
+      {
+        "Day": 22,
+        "state": "AM",
+        "Deaths": 287,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 6.924678080884583
+      },
+      {
+        "Day": 23,
+        "state": "AM",
+        "Deaths": 304,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 7.334850650135586
+      },
+      {
+        "Day": 24,
+        "state": "AM",
+        "Deaths": 320,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 7.720895421195354
+      },
+      {
+        "Day": 25,
+        "state": "AM",
+        "Deaths": 351,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 4144597,
+        "DeathPop": 8.468857165123653
+      },
+      {
+        "Day": 0,
+        "state": "AP",
+        "Deaths": 5,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 0.59120453193746
+      },
+      {
+        "Day": 1,
+        "state": "AP",
+        "Deaths": 5,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 0.59120453193746
+      },
+      {
+        "Day": 2,
+        "state": "AP",
+        "Deaths": 6,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 0.709445438324952
+      },
+      {
+        "Day": 3,
+        "state": "AP",
+        "Deaths": 7,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 0.827686344712444
+      },
+      {
+        "Day": 4,
+        "state": "AP",
+        "Deaths": 7,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 0.827686344712444
+      },
+      {
+        "Day": 5,
+        "state": "AP",
+        "Deaths": 10,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.18240906387492
+      },
+      {
+        "Day": 6,
+        "state": "AP",
+        "Deaths": 10,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.18240906387492
+      },
+      {
+        "Day": 7,
+        "state": "AP",
+        "Deaths": 10,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.18240906387492
+      },
+      {
+        "Day": 8,
+        "state": "AP",
+        "Deaths": 11,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.300649970262412
+      },
+      {
+        "Day": 9,
+        "state": "AP",
+        "Deaths": 13,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.537131783037396
+      },
+      {
+        "Day": 10,
+        "state": "AP",
+        "Deaths": 13,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.537131783037396
+      },
+      {
+        "Day": 11,
+        "state": "AP",
+        "Deaths": 14,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.655372689424888
+      },
+      {
+        "Day": 12,
+        "state": "AP",
+        "Deaths": 16,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 1.891854502199872
+      },
+      {
+        "Day": 13,
+        "state": "AP",
+        "Deaths": 18,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 2.128336314974856
+      },
+      {
+        "Day": 14,
+        "state": "AP",
+        "Deaths": 20,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 2.36481812774984
+      },
+      {
+        "Day": 15,
+        "state": "AP",
+        "Deaths": 23,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 2.719540846912316
+      },
+      {
+        "Day": 16,
+        "state": "AP",
+        "Deaths": 26,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 3.074263566074792
+      },
+      {
+        "Day": 17,
+        "state": "AP",
+        "Deaths": 28,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 845731,
+        "DeathPop": 3.310745378849776
+      },
+      {
+        "Day": 0,
+        "state": "BA",
+        "Deaths": 6,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.0403413849358814
+      },
+      {
+        "Day": 1,
+        "state": "BA",
+        "Deaths": 7,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.04706494909186164
+      },
+      {
+        "Day": 2,
+        "state": "BA",
+        "Deaths": 9,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.0605120774038221
+      },
+      {
+        "Day": 3,
+        "state": "BA",
+        "Deaths": 10,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.06723564155980233
+      },
+      {
+        "Day": 4,
+        "state": "BA",
+        "Deaths": 14,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.09412989818372328
+      },
+      {
+        "Day": 5,
+        "state": "BA",
+        "Deaths": 18,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.1210241548076442
+      },
+      {
+        "Day": 6,
+        "state": "BA",
+        "Deaths": 19,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.12774771896362444
+      },
+      {
+        "Day": 7,
+        "state": "BA",
+        "Deaths": 19,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.12774771896362444
+      },
+      {
+        "Day": 8,
+        "state": "BA",
+        "Deaths": 21,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.1411948472755849
+      },
+      {
+        "Day": 9,
+        "state": "BA",
+        "Deaths": 21,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.1411948472755849
+      },
+      {
+        "Day": 10,
+        "state": "BA",
+        "Deaths": 22,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.14791841143156514
+      },
+      {
+        "Day": 11,
+        "state": "BA",
+        "Deaths": 26,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.1748126680554861
+      },
+      {
+        "Day": 12,
+        "state": "BA",
+        "Deaths": 28,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.18825979636744655
+      },
+      {
+        "Day": 13,
+        "state": "BA",
+        "Deaths": 34,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.22860118130332796
+      },
+      {
+        "Day": 14,
+        "state": "BA",
+        "Deaths": 36,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.2420483096152884
+      },
+      {
+        "Day": 15,
+        "state": "BA",
+        "Deaths": 40,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.2689425662392093
+      },
+      {
+        "Day": 16,
+        "state": "BA",
+        "Deaths": 45,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.30256038701911053
+      },
+      {
+        "Day": 17,
+        "state": "BA",
+        "Deaths": 47,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.31600751533107097
+      },
+      {
+        "Day": 18,
+        "state": "BA",
+        "Deaths": 48,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.3227310794870512
+      },
+      {
+        "Day": 19,
+        "state": "BA",
+        "Deaths": 53,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.35634890026695243
+      },
+      {
+        "Day": 20,
+        "state": "BA",
+        "Deaths": 62,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.4168609776707745
+      },
+      {
+        "Day": 21,
+        "state": "BA",
+        "Deaths": 67,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.4504787984506757
+      },
+      {
+        "Day": 22,
+        "state": "BA",
+        "Deaths": 72,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.4840966192305768
+      },
+      {
+        "Day": 23,
+        "state": "BA",
+        "Deaths": 74,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.4975437475425373
+      },
+      {
+        "Day": 24,
+        "state": "BA",
+        "Deaths": 83,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.5580558249463594
+      },
+      {
+        "Day": 25,
+        "state": "BA",
+        "Deaths": 93,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 14873064,
+        "DeathPop": 0.6252914665061617
+      },
+      {
+        "Day": 0,
+        "state": "CE",
+        "Deaths": 5,
+        "Date": "2020-03-29T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.054752050957076796
+      },
+      {
+        "Day": 1,
+        "state": "CE",
+        "Deaths": 5,
+        "Date": "2020-03-30T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.054752050957076796
+      },
+      {
+        "Day": 2,
+        "state": "CE",
+        "Deaths": 7,
+        "Date": "2020-03-31T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.07665287133990752
+      },
+      {
+        "Day": 3,
+        "state": "CE",
+        "Deaths": 9,
+        "Date": "2020-04-01T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.09855369172273826
+      },
+      {
+        "Day": 4,
+        "state": "CE",
+        "Deaths": 21,
+        "Date": "2020-04-02T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.2299586140197226
+      },
+      {
+        "Day": 5,
+        "state": "CE",
+        "Deaths": 22,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.2409090242111379
+      },
+      {
+        "Day": 6,
+        "state": "CE",
+        "Deaths": 23,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.25185943440255326
+      },
+      {
+        "Day": 7,
+        "state": "CE",
+        "Deaths": 35,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.38326435669953757
+      },
+      {
+        "Day": 8,
+        "state": "CE",
+        "Deaths": 35,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.38326435669953757
+      },
+      {
+        "Day": 9,
+        "state": "CE",
+        "Deaths": 40,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.43801640765661437
+      },
+      {
+        "Day": 10,
+        "state": "CE",
+        "Deaths": 57,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.6241733809106755
+      },
+      {
+        "Day": 11,
+        "state": "CE",
+        "Deaths": 57,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.6241733809106755
+      },
+      {
+        "Day": 12,
+        "state": "CE",
+        "Deaths": 67,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.7336774828248291
+      },
+      {
+        "Day": 13,
+        "state": "CE",
+        "Deaths": 74,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.8103303541647366
+      },
+      {
+        "Day": 14,
+        "state": "CE",
+        "Deaths": 76,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 0.8322311745475673
+      },
+      {
+        "Day": 15,
+        "state": "CE",
+        "Deaths": 101,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 1.1059914293329514
+      },
+      {
+        "Day": 16,
+        "state": "CE",
+        "Deaths": 111,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 1.215495531247105
+      },
+      {
+        "Day": 17,
+        "state": "CE",
+        "Deaths": 124,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 1.3578508637355047
+      },
+      {
+        "Day": 18,
+        "state": "CE",
+        "Deaths": 135,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 1.4783053758410736
+      },
+      {
+        "Day": 19,
+        "state": "CE",
+        "Deaths": 155,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 1.6973135796693808
+      },
+      {
+        "Day": 20,
+        "state": "CE",
+        "Deaths": 180,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 1.9710738344547647
+      },
+      {
+        "Day": 21,
+        "state": "CE",
+        "Deaths": 189,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 2.069627526177503
+      },
+      {
+        "Day": 22,
+        "state": "CE",
+        "Deaths": 206,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 2.2557844994315643
+      },
+      {
+        "Day": 23,
+        "state": "CE",
+        "Deaths": 221,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 2.4200406523027946
+      },
+      {
+        "Day": 24,
+        "state": "CE",
+        "Deaths": 239,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 2.617148035748271
+      },
+      {
+        "Day": 25,
+        "state": "CE",
+        "Deaths": 271,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 2.967561161873563
+      },
+      {
+        "Day": 26,
+        "state": "CE",
+        "Deaths": 293,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 3.2084701860847007
+      },
+      {
+        "Day": 27,
+        "state": "CE",
+        "Deaths": 326,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 3.5698337224014076
+      },
+      {
+        "Day": 28,
+        "state": "CE",
+        "Deaths": 376,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 4.117354231972175
+      },
+      {
+        "Day": 29,
+        "state": "CE",
+        "Deaths": 397,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 4.347312845991898
+      },
+      {
+        "Day": 30,
+        "state": "CE",
+        "Deaths": 417,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 9132078,
+        "DeathPop": 4.566321049820205
+      },
+      {
+        "Day": 0,
+        "state": "DF",
+        "Deaths": 5,
+        "Date": "2020-04-02T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.16582273947125098
+      },
+      {
+        "Day": 1,
+        "state": "DF",
+        "Deaths": 6,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.19898728736550117
+      },
+      {
+        "Day": 2,
+        "state": "DF",
+        "Deaths": 7,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.2321518352597514
+      },
+      {
+        "Day": 3,
+        "state": "DF",
+        "Deaths": 7,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.2321518352597514
+      },
+      {
+        "Day": 4,
+        "state": "DF",
+        "Deaths": 10,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.33164547894250196
+      },
+      {
+        "Day": 5,
+        "state": "DF",
+        "Deaths": 12,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.39797457473100234
+      },
+      {
+        "Day": 6,
+        "state": "DF",
+        "Deaths": 12,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.39797457473100234
+      },
+      {
+        "Day": 7,
+        "state": "DF",
+        "Deaths": 13,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.4311391226252525
+      },
+      {
+        "Day": 8,
+        "state": "DF",
+        "Deaths": 14,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.4643036705195028
+      },
+      {
+        "Day": 9,
+        "state": "DF",
+        "Deaths": 14,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.4643036705195028
+      },
+      {
+        "Day": 10,
+        "state": "DF",
+        "Deaths": 14,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.4643036705195028
+      },
+      {
+        "Day": 11,
+        "state": "DF",
+        "Deaths": 15,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.4974682184137529
+      },
+      {
+        "Day": 12,
+        "state": "DF",
+        "Deaths": 17,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.5637973142022533
+      },
+      {
+        "Day": 13,
+        "state": "DF",
+        "Deaths": 17,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.5637973142022533
+      },
+      {
+        "Day": 14,
+        "state": "DF",
+        "Deaths": 20,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.6632909578850039
+      },
+      {
+        "Day": 15,
+        "state": "DF",
+        "Deaths": 24,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.7959491494620047
+      },
+      {
+        "Day": 16,
+        "state": "DF",
+        "Deaths": 24,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.7959491494620047
+      },
+      {
+        "Day": 17,
+        "state": "DF",
+        "Deaths": 24,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.7959491494620047
+      },
+      {
+        "Day": 18,
+        "state": "DF",
+        "Deaths": 24,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.7959491494620047
+      },
+      {
+        "Day": 19,
+        "state": "DF",
+        "Deaths": 24,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.7959491494620047
+      },
+      {
+        "Day": 20,
+        "state": "DF",
+        "Deaths": 25,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.8291136973562548
+      },
+      {
+        "Day": 21,
+        "state": "DF",
+        "Deaths": 26,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.862278245250505
+      },
+      {
+        "Day": 22,
+        "state": "DF",
+        "Deaths": 26,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.862278245250505
+      },
+      {
+        "Day": 23,
+        "state": "DF",
+        "Deaths": 27,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.8954427931447554
+      },
+      {
+        "Day": 24,
+        "state": "DF",
+        "Deaths": 27,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.8954427931447554
+      },
+      {
+        "Day": 25,
+        "state": "DF",
+        "Deaths": 28,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.9286073410390056
+      },
+      {
+        "Day": 26,
+        "state": "DF",
+        "Deaths": 28,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 3015268,
+        "DeathPop": 0.9286073410390056
+      },
+      {
+        "Day": 0,
+        "state": "ES",
+        "Deaths": 5,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.12441989225237332
+      },
+      {
+        "Day": 1,
+        "state": "ES",
+        "Deaths": 6,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.14930387070284795
+      },
+      {
+        "Day": 2,
+        "state": "ES",
+        "Deaths": 6,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.14930387070284795
+      },
+      {
+        "Day": 3,
+        "state": "ES",
+        "Deaths": 6,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.14930387070284795
+      },
+      {
+        "Day": 4,
+        "state": "ES",
+        "Deaths": 6,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.14930387070284795
+      },
+      {
+        "Day": 5,
+        "state": "ES",
+        "Deaths": 6,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.14930387070284795
+      },
+      {
+        "Day": 6,
+        "state": "ES",
+        "Deaths": 7,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.17418784915332264
+      },
+      {
+        "Day": 7,
+        "state": "ES",
+        "Deaths": 8,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.1990718276037973
+      },
+      {
+        "Day": 8,
+        "state": "ES",
+        "Deaths": 9,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.22395580605427196
+      },
+      {
+        "Day": 9,
+        "state": "ES",
+        "Deaths": 14,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.3483756983066453
+      },
+      {
+        "Day": 10,
+        "state": "ES",
+        "Deaths": 17,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.4230276336580692
+      },
+      {
+        "Day": 11,
+        "state": "ES",
+        "Deaths": 18,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.4479116121085439
+      },
+      {
+        "Day": 12,
+        "state": "ES",
+        "Deaths": 21,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.5225635474599679
+      },
+      {
+        "Day": 13,
+        "state": "ES",
+        "Deaths": 28,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.6967513966132906
+      },
+      {
+        "Day": 14,
+        "state": "ES",
+        "Deaths": 28,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.6967513966132906
+      },
+      {
+        "Day": 15,
+        "state": "ES",
+        "Deaths": 30,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.7465193535142398
+      },
+      {
+        "Day": 16,
+        "state": "ES",
+        "Deaths": 34,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.8460552673161384
+      },
+      {
+        "Day": 17,
+        "state": "ES",
+        "Deaths": 34,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.8460552673161384
+      },
+      {
+        "Day": 18,
+        "state": "ES",
+        "Deaths": 34,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.8460552673161384
+      },
+      {
+        "Day": 19,
+        "state": "ES",
+        "Deaths": 37,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 0.9207072026675625
+      },
+      {
+        "Day": 20,
+        "state": "ES",
+        "Deaths": 43,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 1.0700110733704105
+      },
+      {
+        "Day": 21,
+        "state": "ES",
+        "Deaths": 47,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 1.169546987172309
+      },
+      {
+        "Day": 22,
+        "state": "ES",
+        "Deaths": 52,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 1.2939668794246824
+      },
+      {
+        "Day": 23,
+        "state": "ES",
+        "Deaths": 57,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 1.4183867716770557
+      },
+      {
+        "Day": 24,
+        "state": "ES",
+        "Deaths": 63,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 1.5676906423799035
+      },
+      {
+        "Day": 25,
+        "state": "ES",
+        "Deaths": 77,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 4018650,
+        "DeathPop": 1.916066340686549
+      },
+      {
+        "Day": 0,
+        "state": "GO",
+        "Deaths": 5,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.07124177549322819
+      },
+      {
+        "Day": 1,
+        "state": "GO",
+        "Deaths": 5,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.07124177549322819
+      },
+      {
+        "Day": 2,
+        "state": "GO",
+        "Deaths": 7,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.09973848569051945
+      },
+      {
+        "Day": 3,
+        "state": "GO",
+        "Deaths": 7,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.09973848569051945
+      },
+      {
+        "Day": 4,
+        "state": "GO",
+        "Deaths": 8,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.1139868407891651
+      },
+      {
+        "Day": 5,
+        "state": "GO",
+        "Deaths": 10,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.14248355098645638
+      },
+      {
+        "Day": 6,
+        "state": "GO",
+        "Deaths": 14,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.1994769713810389
+      },
+      {
+        "Day": 7,
+        "state": "GO",
+        "Deaths": 15,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.21372532647968456
+      },
+      {
+        "Day": 8,
+        "state": "GO",
+        "Deaths": 15,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.21372532647968456
+      },
+      {
+        "Day": 9,
+        "state": "GO",
+        "Deaths": 15,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.21372532647968456
+      },
+      {
+        "Day": 10,
+        "state": "GO",
+        "Deaths": 16,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.2279736815783302
+      },
+      {
+        "Day": 11,
+        "state": "GO",
+        "Deaths": 16,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.2279736815783302
+      },
+      {
+        "Day": 12,
+        "state": "GO",
+        "Deaths": 18,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.2564703917756215
+      },
+      {
+        "Day": 13,
+        "state": "GO",
+        "Deaths": 18,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.2564703917756215
+      },
+      {
+        "Day": 14,
+        "state": "GO",
+        "Deaths": 19,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.27071874687426706
+      },
+      {
+        "Day": 15,
+        "state": "GO",
+        "Deaths": 19,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.27071874687426706
+      },
+      {
+        "Day": 16,
+        "state": "GO",
+        "Deaths": 21,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.2992154570715584
+      },
+      {
+        "Day": 17,
+        "state": "GO",
+        "Deaths": 23,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.32771216726884966
+      },
+      {
+        "Day": 18,
+        "state": "GO",
+        "Deaths": 24,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.3419605223674953
+      },
+      {
+        "Day": 19,
+        "state": "GO",
+        "Deaths": 25,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.35620887746614094
+      },
+      {
+        "Day": 20,
+        "state": "GO",
+        "Deaths": 25,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.35620887746614094
+      },
+      {
+        "Day": 21,
+        "state": "GO",
+        "Deaths": 26,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.3704572325647865
+      },
+      {
+        "Day": 22,
+        "state": "GO",
+        "Deaths": 27,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 7018354,
+        "DeathPop": 0.3847055876634322
+      },
+      {
+        "Day": 0,
+        "state": "MA",
+        "Deaths": 11,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.15547305432892813
+      },
+      {
+        "Day": 1,
+        "state": "MA",
+        "Deaths": 12,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.16960696835883068
+      },
+      {
+        "Day": 2,
+        "state": "MA",
+        "Deaths": 16,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.2261426244784409
+      },
+      {
+        "Day": 3,
+        "state": "MA",
+        "Deaths": 21,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.29681219462795366
+      },
+      {
+        "Day": 4,
+        "state": "MA",
+        "Deaths": 24,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.33921393671766137
+      },
+      {
+        "Day": 5,
+        "state": "MA",
+        "Deaths": 27,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.3816156788073691
+      },
+      {
+        "Day": 6,
+        "state": "MA",
+        "Deaths": 32,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.4522852489568818
+      },
+      {
+        "Day": 7,
+        "state": "MA",
+        "Deaths": 34,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.4805530770166869
+      },
+      {
+        "Day": 8,
+        "state": "MA",
+        "Deaths": 37,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.5229548191063945
+      },
+      {
+        "Day": 9,
+        "state": "MA",
+        "Deaths": 40,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.5653565611961022
+      },
+      {
+        "Day": 10,
+        "state": "MA",
+        "Deaths": 44,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.6218922173157125
+      },
+      {
+        "Day": 11,
+        "state": "MA",
+        "Deaths": 48,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.6784278734353227
+      },
+      {
+        "Day": 12,
+        "state": "MA",
+        "Deaths": 54,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.7632313576147381
+      },
+      {
+        "Day": 13,
+        "state": "MA",
+        "Deaths": 60,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.8480348417941533
+      },
+      {
+        "Day": 14,
+        "state": "MA",
+        "Deaths": 66,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 0.9328383259735687
+      },
+      {
+        "Day": 15,
+        "state": "MA",
+        "Deaths": 76,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 1.0741774662725945
+      },
+      {
+        "Day": 16,
+        "state": "MA",
+        "Deaths": 88,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 1.243784434631425
+      },
+      {
+        "Day": 17,
+        "state": "MA",
+        "Deaths": 100,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 1.4133914029902557
+      },
+      {
+        "Day": 18,
+        "state": "MA",
+        "Deaths": 112,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 1.5829983713490863
+      },
+      {
+        "Day": 19,
+        "state": "MA",
+        "Deaths": 125,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 1.7667392537378195
+      },
+      {
+        "Day": 20,
+        "state": "MA",
+        "Deaths": 145,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 2.0494175343358707
+      },
+      {
+        "Day": 21,
+        "state": "MA",
+        "Deaths": 166,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 7075181,
+        "DeathPop": 2.3462297289638245
+      },
+      {
+        "Day": 0,
+        "state": "MG",
+        "Deaths": 6,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.028343612065516638
+      },
+      {
+        "Day": 1,
+        "state": "MG",
+        "Deaths": 6,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.028343612065516638
+      },
+      {
+        "Day": 2,
+        "state": "MG",
+        "Deaths": 6,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.028343612065516638
+      },
+      {
+        "Day": 3,
+        "state": "MG",
+        "Deaths": 9,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.04251541809827496
+      },
+      {
+        "Day": 4,
+        "state": "MG",
+        "Deaths": 11,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.0519632887867805
+      },
+      {
+        "Day": 5,
+        "state": "MG",
+        "Deaths": 14,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.06613509481953882
+      },
+      {
+        "Day": 6,
+        "state": "MG",
+        "Deaths": 15,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.0708590301637916
+      },
+      {
+        "Day": 7,
+        "state": "MG",
+        "Deaths": 17,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.08030690085229714
+      },
+      {
+        "Day": 8,
+        "state": "MG",
+        "Deaths": 17,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.08030690085229714
+      },
+      {
+        "Day": 9,
+        "state": "MG",
+        "Deaths": 20,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.09447870688505546
+      },
+      {
+        "Day": 10,
+        "state": "MG",
+        "Deaths": 23,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.10865051291781377
+      },
+      {
+        "Day": 11,
+        "state": "MG",
+        "Deaths": 27,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.12754625429482486
+      },
+      {
+        "Day": 12,
+        "state": "MG",
+        "Deaths": 30,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.1417180603275832
+      },
+      {
+        "Day": 13,
+        "state": "MG",
+        "Deaths": 33,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.1558898663603415
+      },
+      {
+        "Day": 14,
+        "state": "MG",
+        "Deaths": 35,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.16533773704884705
+      },
+      {
+        "Day": 15,
+        "state": "MG",
+        "Deaths": 39,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.18423347842585816
+      },
+      {
+        "Day": 16,
+        "state": "MG",
+        "Deaths": 39,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.18423347842585816
+      },
+      {
+        "Day": 17,
+        "state": "MG",
+        "Deaths": 41,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.19368134911436372
+      },
+      {
+        "Day": 18,
+        "state": "MG",
+        "Deaths": 44,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.207853155147122
+      },
+      {
+        "Day": 19,
+        "state": "MG",
+        "Deaths": 47,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.22202496117988033
+      },
+      {
+        "Day": 20,
+        "state": "MG",
+        "Deaths": 51,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.2409207025568914
+      },
+      {
+        "Day": 21,
+        "state": "MG",
+        "Deaths": 54,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.2550925085896497
+      },
+      {
+        "Day": 22,
+        "state": "MG",
+        "Deaths": 58,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.2739882499666608
+      },
+      {
+        "Day": 23,
+        "state": "MG",
+        "Deaths": 61,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.28816005599941913
+      },
+      {
+        "Day": 24,
+        "state": "MG",
+        "Deaths": 62,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.29288399134367193
+      },
+      {
+        "Day": 25,
+        "state": "MG",
+        "Deaths": 71,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 21168791,
+        "DeathPop": 0.3353994094419469
+      },
+      {
+        "Day": 0,
+        "state": "MS",
+        "Deaths": 5,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.1799217412394305
+      },
+      {
+        "Day": 1,
+        "state": "MS",
+        "Deaths": 5,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.1799217412394305
+      },
+      {
+        "Day": 2,
+        "state": "MS",
+        "Deaths": 5,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.1799217412394305
+      },
+      {
+        "Day": 3,
+        "state": "MS",
+        "Deaths": 5,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.1799217412394305
+      },
+      {
+        "Day": 4,
+        "state": "MS",
+        "Deaths": 5,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.1799217412394305
+      },
+      {
+        "Day": 5,
+        "state": "MS",
+        "Deaths": 6,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.2159060894873166
+      },
+      {
+        "Day": 6,
+        "state": "MS",
+        "Deaths": 6,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.2159060894873166
+      },
+      {
+        "Day": 7,
+        "state": "MS",
+        "Deaths": 7,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.2518904377352027
+      },
+      {
+        "Day": 8,
+        "state": "MS",
+        "Deaths": 7,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.2518904377352027
+      },
+      {
+        "Day": 9,
+        "state": "MS",
+        "Deaths": 7,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.2518904377352027
+      },
+      {
+        "Day": 10,
+        "state": "MS",
+        "Deaths": 7,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.2518904377352027
+      },
+      {
+        "Day": 11,
+        "state": "MS",
+        "Deaths": 9,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.3238591342309749
+      },
+      {
+        "Day": 12,
+        "state": "MS",
+        "Deaths": 9,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 2778986,
+        "DeathPop": 0.3238591342309749
+      },
+      {
+        "Day": 0,
+        "state": "MT",
+        "Deaths": 5,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.14349401027302316
+      },
+      {
+        "Day": 1,
+        "state": "MT",
+        "Deaths": 5,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.14349401027302316
+      },
+      {
+        "Day": 2,
+        "state": "MT",
+        "Deaths": 5,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.14349401027302316
+      },
+      {
+        "Day": 3,
+        "state": "MT",
+        "Deaths": 5,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.14349401027302316
+      },
+      {
+        "Day": 4,
+        "state": "MT",
+        "Deaths": 6,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.17219281232762781
+      },
+      {
+        "Day": 5,
+        "state": "MT",
+        "Deaths": 6,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.17219281232762781
+      },
+      {
+        "Day": 6,
+        "state": "MT",
+        "Deaths": 6,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.17219281232762781
+      },
+      {
+        "Day": 7,
+        "state": "MT",
+        "Deaths": 7,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.20089161438223246
+      },
+      {
+        "Day": 8,
+        "state": "MT",
+        "Deaths": 8,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.2295904164368371
+      },
+      {
+        "Day": 9,
+        "state": "MT",
+        "Deaths": 9,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.2582892184914417
+      },
+      {
+        "Day": 10,
+        "state": "MT",
+        "Deaths": 9,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.2582892184914417
+      },
+      {
+        "Day": 11,
+        "state": "MT",
+        "Deaths": 10,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.28698802054604633
+      },
+      {
+        "Day": 12,
+        "state": "MT",
+        "Deaths": 11,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 3484466,
+        "DeathPop": 0.315686822600651
+      },
+      {
+        "Day": 0,
+        "state": "PA",
+        "Deaths": 5,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.05812017275640151
+      },
+      {
+        "Day": 1,
+        "state": "PA",
+        "Deaths": 5,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.05812017275640151
+      },
+      {
+        "Day": 2,
+        "state": "PA",
+        "Deaths": 6,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.0697442073076818
+      },
+      {
+        "Day": 3,
+        "state": "PA",
+        "Deaths": 7,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.0813682418589621
+      },
+      {
+        "Day": 4,
+        "state": "PA",
+        "Deaths": 9,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.10461631096152271
+      },
+      {
+        "Day": 5,
+        "state": "PA",
+        "Deaths": 11,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.1278643800640833
+      },
+      {
+        "Day": 6,
+        "state": "PA",
+        "Deaths": 14,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.1627364837179242
+      },
+      {
+        "Day": 7,
+        "state": "PA",
+        "Deaths": 14,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.1627364837179242
+      },
+      {
+        "Day": 8,
+        "state": "PA",
+        "Deaths": 21,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.2441047255768863
+      },
+      {
+        "Day": 9,
+        "state": "PA",
+        "Deaths": 21,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.2441047255768863
+      },
+      {
+        "Day": 10,
+        "state": "PA",
+        "Deaths": 26,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.3022248983332878
+      },
+      {
+        "Day": 11,
+        "state": "PA",
+        "Deaths": 32,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.37196910564096963
+      },
+      {
+        "Day": 12,
+        "state": "PA",
+        "Deaths": 33,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.38359314019224994
+      },
+      {
+        "Day": 13,
+        "state": "PA",
+        "Deaths": 34,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.39521717474353024
+      },
+      {
+        "Day": 14,
+        "state": "PA",
+        "Deaths": 35,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.40684120929481055
+      },
+      {
+        "Day": 15,
+        "state": "PA",
+        "Deaths": 38,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.44171331294865146
+      },
+      {
+        "Day": 16,
+        "state": "PA",
+        "Deaths": 43,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.49983348570505287
+      },
+      {
+        "Day": 17,
+        "state": "PA",
+        "Deaths": 53,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.6160738312178559
+      },
+      {
+        "Day": 18,
+        "state": "PA",
+        "Deaths": 86,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 0.9996669714101057
+      },
+      {
+        "Day": 19,
+        "state": "PA",
+        "Deaths": 95,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 1.1042832823716284
+      },
+      {
+        "Day": 20,
+        "state": "PA",
+        "Deaths": 114,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 1.3251399388459542
+      },
+      {
+        "Day": 21,
+        "state": "PA",
+        "Deaths": 122,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 1.4181322152561966
+      },
+      {
+        "Day": 22,
+        "state": "PA",
+        "Deaths": 132,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 8602865,
+        "DeathPop": 1.5343725607689997
+      },
+      {
+        "Day": 0,
+        "state": "PB",
+        "Deaths": 7,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.17421052146933136
+      },
+      {
+        "Day": 1,
+        "state": "PB",
+        "Deaths": 11,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.2737593908803779
+      },
+      {
+        "Day": 2,
+        "state": "PB",
+        "Deaths": 11,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.2737593908803779
+      },
+      {
+        "Day": 3,
+        "state": "PB",
+        "Deaths": 13,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.3235338255859011
+      },
+      {
+        "Day": 4,
+        "state": "PB",
+        "Deaths": 13,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.3235338255859011
+      },
+      {
+        "Day": 5,
+        "state": "PB",
+        "Deaths": 16,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.39819547764418595
+      },
+      {
+        "Day": 6,
+        "state": "PB",
+        "Deaths": 21,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.5226315644079941
+      },
+      {
+        "Day": 7,
+        "state": "PB",
+        "Deaths": 24,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.5972932164662789
+      },
+      {
+        "Day": 8,
+        "state": "PB",
+        "Deaths": 26,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.6470676511718022
+      },
+      {
+        "Day": 9,
+        "state": "PB",
+        "Deaths": 28,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.6968420858773254
+      },
+      {
+        "Day": 10,
+        "state": "PB",
+        "Deaths": 29,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.7217293032300871
+      },
+      {
+        "Day": 11,
+        "state": "PB",
+        "Deaths": 32,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.7963909552883719
+      },
+      {
+        "Day": 12,
+        "state": "PB",
+        "Deaths": 33,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.8212781726411336
+      },
+      {
+        "Day": 13,
+        "state": "PB",
+        "Deaths": 39,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.9706014767577034
+      },
+      {
+        "Day": 14,
+        "state": "PB",
+        "Deaths": 40,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 0.9954886941104648
+      },
+      {
+        "Day": 15,
+        "state": "PB",
+        "Deaths": 44,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 1.0950375635215115
+      },
+      {
+        "Day": 16,
+        "state": "PB",
+        "Deaths": 46,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 1.1448119982270346
+      },
+      {
+        "Day": 17,
+        "state": "PB",
+        "Deaths": 49,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 1.2194736502853194
+      },
+      {
+        "Day": 18,
+        "state": "PB",
+        "Deaths": 50,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 1.2443608676380813
+      },
+      {
+        "Day": 19,
+        "state": "PB",
+        "Deaths": 53,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 1.319022519696366
+      },
+      {
+        "Day": 20,
+        "state": "PB",
+        "Deaths": 57,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 4018127,
+        "DeathPop": 1.4185713891074125
+      },
+      {
+        "Day": 0,
+        "state": "PE",
+        "Deaths": 5,
+        "Date": "2020-03-28T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.05231728423907284
+      },
+      {
+        "Day": 1,
+        "state": "PE",
+        "Deaths": 5,
+        "Date": "2020-03-29T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.05231728423907284
+      },
+      {
+        "Day": 2,
+        "state": "PE",
+        "Deaths": 6,
+        "Date": "2020-03-30T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.06278074108688739
+      },
+      {
+        "Day": 3,
+        "state": "PE",
+        "Deaths": 6,
+        "Date": "2020-03-31T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.06278074108688739
+      },
+      {
+        "Day": 4,
+        "state": "PE",
+        "Deaths": 8,
+        "Date": "2020-04-01T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.08370765478251653
+      },
+      {
+        "Day": 5,
+        "state": "PE",
+        "Deaths": 9,
+        "Date": "2020-04-02T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.0941711116303311
+      },
+      {
+        "Day": 6,
+        "state": "PE",
+        "Deaths": 10,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.10463456847814567
+      },
+      {
+        "Day": 7,
+        "state": "PE",
+        "Deaths": 14,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.14648839586940393
+      },
+      {
+        "Day": 8,
+        "state": "PE",
+        "Deaths": 21,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.21973259380410587
+      },
+      {
+        "Day": 9,
+        "state": "PE",
+        "Deaths": 30,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.31390370543443696
+      },
+      {
+        "Day": 10,
+        "state": "PE",
+        "Deaths": 34,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.3557575328256952
+      },
+      {
+        "Day": 11,
+        "state": "PE",
+        "Deaths": 46,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.48131901499947
+      },
+      {
+        "Day": 12,
+        "state": "PE",
+        "Deaths": 56,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.5859535834776157
+      },
+      {
+        "Day": 13,
+        "state": "PE",
+        "Deaths": 65,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.6801246951079468
+      },
+      {
+        "Day": 14,
+        "state": "PE",
+        "Deaths": 72,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.7533688930426488
+      },
+      {
+        "Day": 15,
+        "state": "PE",
+        "Deaths": 85,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 0.889393832064238
+      },
+      {
+        "Day": 16,
+        "state": "PE",
+        "Deaths": 102,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 1.0672725984770857
+      },
+      {
+        "Day": 17,
+        "state": "PE",
+        "Deaths": 115,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 1.203297537498675
+      },
+      {
+        "Day": 18,
+        "state": "PE",
+        "Deaths": 143,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 1.496274329237483
+      },
+      {
+        "Day": 19,
+        "state": "PE",
+        "Deaths": 160,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 1.6741530956503308
+      },
+      {
+        "Day": 20,
+        "state": "PE",
+        "Deaths": 186,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 1.9462029736935094
+      },
+      {
+        "Day": 21,
+        "state": "PE",
+        "Deaths": 205,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 2.145008653801986
+      },
+      {
+        "Day": 22,
+        "state": "PE",
+        "Deaths": 216,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 2.2601066791279463
+      },
+      {
+        "Day": 23,
+        "state": "PE",
+        "Deaths": 234,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 2.4484489023886082
+      },
+      {
+        "Day": 24,
+        "state": "PE",
+        "Deaths": 260,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 2.7204987804317873
+      },
+      {
+        "Day": 25,
+        "state": "PE",
+        "Deaths": 282,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 2.9506948310837076
+      },
+      {
+        "Day": 26,
+        "state": "PE",
+        "Deaths": 312,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 3.264598536518145
+      },
+      {
+        "Day": 27,
+        "state": "PE",
+        "Deaths": 352,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 3.683136810430727
+      },
+      {
+        "Day": 28,
+        "state": "PE",
+        "Deaths": 381,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 3.9865770590173497
+      },
+      {
+        "Day": 29,
+        "state": "PE",
+        "Deaths": 415,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 4.342334591843045
+      },
+      {
+        "Day": 30,
+        "state": "PE",
+        "Deaths": 450,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 4.7085555815165545
+      },
+      {
+        "Day": 31,
+        "state": "PE",
+        "Deaths": 508,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 9557071,
+        "DeathPop": 5.3154360786898
+      },
+      {
+        "Day": 0,
+        "state": "PI",
+        "Deaths": 5,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.15275445302143725
+      },
+      {
+        "Day": 1,
+        "state": "PI",
+        "Deaths": 6,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.1833053436257247
+      },
+      {
+        "Day": 2,
+        "state": "PI",
+        "Deaths": 7,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.21385623423001218
+      },
+      {
+        "Day": 3,
+        "state": "PI",
+        "Deaths": 7,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.21385623423001218
+      },
+      {
+        "Day": 4,
+        "state": "PI",
+        "Deaths": 7,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.21385623423001218
+      },
+      {
+        "Day": 5,
+        "state": "PI",
+        "Deaths": 7,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.21385623423001218
+      },
+      {
+        "Day": 6,
+        "state": "PI",
+        "Deaths": 8,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.2444071248342996
+      },
+      {
+        "Day": 7,
+        "state": "PI",
+        "Deaths": 8,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.2444071248342996
+      },
+      {
+        "Day": 8,
+        "state": "PI",
+        "Deaths": 8,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.2444071248342996
+      },
+      {
+        "Day": 9,
+        "state": "PI",
+        "Deaths": 8,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.2444071248342996
+      },
+      {
+        "Day": 10,
+        "state": "PI",
+        "Deaths": 9,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.27495801543858706
+      },
+      {
+        "Day": 11,
+        "state": "PI",
+        "Deaths": 10,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.3055089060428745
+      },
+      {
+        "Day": 12,
+        "state": "PI",
+        "Deaths": 12,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.3666106872514494
+      },
+      {
+        "Day": 13,
+        "state": "PI",
+        "Deaths": 14,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.42771246846002436
+      },
+      {
+        "Day": 14,
+        "state": "PI",
+        "Deaths": 15,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.45826335906431176
+      },
+      {
+        "Day": 15,
+        "state": "PI",
+        "Deaths": 15,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.45826335906431176
+      },
+      {
+        "Day": 16,
+        "state": "PI",
+        "Deaths": 16,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.4888142496685992
+      },
+      {
+        "Day": 17,
+        "state": "PI",
+        "Deaths": 17,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.5193651402728866
+      },
+      {
+        "Day": 18,
+        "state": "PI",
+        "Deaths": 18,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.5499160308771741
+      },
+      {
+        "Day": 19,
+        "state": "PI",
+        "Deaths": 20,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.611017812085749
+      },
+      {
+        "Day": 20,
+        "state": "PI",
+        "Deaths": 21,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.6415687026900365
+      },
+      {
+        "Day": 21,
+        "state": "PI",
+        "Deaths": 24,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 3273227,
+        "DeathPop": 0.7332213745028988
+      },
+      {
+        "Day": 0,
+        "state": "PR",
+        "Deaths": 5,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.04372939307013311
+      },
+      {
+        "Day": 1,
+        "state": "PR",
+        "Deaths": 7,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.06122115029818636
+      },
+      {
+        "Day": 2,
+        "state": "PR",
+        "Deaths": 10,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.08745878614026623
+      },
+      {
+        "Day": 3,
+        "state": "PR",
+        "Deaths": 14,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.12244230059637272
+      },
+      {
+        "Day": 4,
+        "state": "PR",
+        "Deaths": 15,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.13118817921039932
+      },
+      {
+        "Day": 5,
+        "state": "PR",
+        "Deaths": 17,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.14867993643845256
+      },
+      {
+        "Day": 6,
+        "state": "PR",
+        "Deaths": 24,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.20990108673663896
+      },
+      {
+        "Day": 7,
+        "state": "PR",
+        "Deaths": 26,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.22739284396469217
+      },
+      {
+        "Day": 8,
+        "state": "PR",
+        "Deaths": 27,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.23613872257871882
+      },
+      {
+        "Day": 9,
+        "state": "PR",
+        "Deaths": 31,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.2711222370348253
+      },
+      {
+        "Day": 10,
+        "state": "PR",
+        "Deaths": 33,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.28861399426287854
+      },
+      {
+        "Day": 11,
+        "state": "PR",
+        "Deaths": 39,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.34108926594703826
+      },
+      {
+        "Day": 12,
+        "state": "PR",
+        "Deaths": 41,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.35858102317509155
+      },
+      {
+        "Day": 13,
+        "state": "PR",
+        "Deaths": 43,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.3760727804031448
+      },
+      {
+        "Day": 14,
+        "state": "PR",
+        "Deaths": 44,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.3848186590171714
+      },
+      {
+        "Day": 15,
+        "state": "PR",
+        "Deaths": 49,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.4285480520873045
+      },
+      {
+        "Day": 16,
+        "state": "PR",
+        "Deaths": 52,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.45478568792938434
+      },
+      {
+        "Day": 17,
+        "state": "PR",
+        "Deaths": 53,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.46353156654341104
+      },
+      {
+        "Day": 18,
+        "state": "PR",
+        "Deaths": 55,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.4810233237714643
+      },
+      {
+        "Day": 19,
+        "state": "PR",
+        "Deaths": 60,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.5247527168415973
+      },
+      {
+        "Day": 20,
+        "state": "PR",
+        "Deaths": 62,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.5422444740696506
+      },
+      {
+        "Day": 21,
+        "state": "PR",
+        "Deaths": 67,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.5859738671397837
+      },
+      {
+        "Day": 22,
+        "state": "PR",
+        "Deaths": 71,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.6209573815958902
+      },
+      {
+        "Day": 23,
+        "state": "PR",
+        "Deaths": 75,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.6559408960519967
+      },
+      {
+        "Day": 24,
+        "state": "PR",
+        "Deaths": 77,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.67343265328005
+      },
+      {
+        "Day": 25,
+        "state": "PR",
+        "Deaths": 79,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 11433957,
+        "DeathPop": 0.6909244105081032
+      },
+      {
+        "Day": 0,
+        "state": "RJ",
+        "Deaths": 6,
+        "Date": "2020-03-24T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.034752503961351044
+      },
+      {
+        "Day": 1,
+        "state": "RJ",
+        "Deaths": 8,
+        "Date": "2020-03-25T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.046336671948468064
+      },
+      {
+        "Day": 2,
+        "state": "RJ",
+        "Deaths": 9,
+        "Date": "2020-03-26T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.05212875594202656
+      },
+      {
+        "Day": 3,
+        "state": "RJ",
+        "Deaths": 10,
+        "Date": "2020-03-27T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.057920839935585076
+      },
+      {
+        "Day": 4,
+        "state": "RJ",
+        "Deaths": 13,
+        "Date": "2020-03-28T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.07529709191626059
+      },
+      {
+        "Day": 5,
+        "state": "RJ",
+        "Deaths": 17,
+        "Date": "2020-03-29T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.09846542789049463
+      },
+      {
+        "Day": 6,
+        "state": "RJ",
+        "Deaths": 18,
+        "Date": "2020-03-30T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.10425751188405312
+      },
+      {
+        "Day": 7,
+        "state": "RJ",
+        "Deaths": 23,
+        "Date": "2020-03-31T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.13321793185184566
+      },
+      {
+        "Day": 8,
+        "state": "RJ",
+        "Deaths": 28,
+        "Date": "2020-04-01T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.16217835181963822
+      },
+      {
+        "Day": 9,
+        "state": "RJ",
+        "Deaths": 41,
+        "Date": "2020-04-02T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.23747544373589882
+      },
+      {
+        "Day": 10,
+        "state": "RJ",
+        "Deaths": 47,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.2722279476972499
+      },
+      {
+        "Day": 11,
+        "state": "RJ",
+        "Deaths": 58,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.33594087162639347
+      },
+      {
+        "Day": 12,
+        "state": "RJ",
+        "Deaths": 64,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.3706933755877445
+      },
+      {
+        "Day": 13,
+        "state": "RJ",
+        "Deaths": 71,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.411237963542654
+      },
+      {
+        "Day": 14,
+        "state": "RJ",
+        "Deaths": 89,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.5154954754267072
+      },
+      {
+        "Day": 15,
+        "state": "RJ",
+        "Deaths": 106,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.6139609033172018
+      },
+      {
+        "Day": 16,
+        "state": "RJ",
+        "Deaths": 122,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.7066342472141379
+      },
+      {
+        "Day": 17,
+        "state": "RJ",
+        "Deaths": 147,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.8514363470531007
+      },
+      {
+        "Day": 18,
+        "state": "RJ",
+        "Deaths": 155,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.8977730190015686
+      },
+      {
+        "Day": 19,
+        "state": "RJ",
+        "Deaths": 170,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 0.9846542789049463
+      },
+      {
+        "Day": 20,
+        "state": "RJ",
+        "Deaths": 182,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 1.0541592868276484
+      },
+      {
+        "Day": 21,
+        "state": "RJ",
+        "Deaths": 224,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 1.2974268145571057
+      },
+      {
+        "Day": 22,
+        "state": "RJ",
+        "Deaths": 265,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 1.5349022582930045
+      },
+      {
+        "Day": 23,
+        "state": "RJ",
+        "Deaths": 301,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 1.7434172820611107
+      },
+      {
+        "Day": 24,
+        "state": "RJ",
+        "Deaths": 341,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 1.9751006418034511
+      },
+      {
+        "Day": 25,
+        "state": "RJ",
+        "Deaths": 387,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 2.241536505507143
+      },
+      {
+        "Day": 26,
+        "state": "RJ",
+        "Deaths": 402,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 2.3284177654105203
+      },
+      {
+        "Day": 27,
+        "state": "RJ",
+        "Deaths": 422,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 2.44425944528169
+      },
+      {
+        "Day": 28,
+        "state": "RJ",
+        "Deaths": 461,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 2.670150721030472
+      },
+      {
+        "Day": 29,
+        "state": "RJ",
+        "Deaths": 490,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 2.838121156843669
+      },
+      {
+        "Day": 30,
+        "state": "RJ",
+        "Deaths": 530,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 3.069804516586009
+      },
+      {
+        "Day": 31,
+        "state": "RJ",
+        "Deaths": 570,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 3.3014878763283493
+      },
+      {
+        "Day": 32,
+        "state": "RJ",
+        "Deaths": 615,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 3.562131656038482
+      },
+      {
+        "Day": 33,
+        "state": "RJ",
+        "Deaths": 645,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 3.7358941758452375
+      },
+      {
+        "Day": 34,
+        "state": "RJ",
+        "Deaths": 677,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 3.92124086363911
+      },
+      {
+        "Day": 35,
+        "state": "RJ",
+        "Deaths": 738,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 17264943,
+        "DeathPop": 4.274557987246179
+      },
+      {
+        "Day": 0,
+        "state": "RN",
+        "Deaths": 6,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.1710935702180844
+      },
+      {
+        "Day": 1,
+        "state": "RN",
+        "Deaths": 7,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.19960916525443181
+      },
+      {
+        "Day": 2,
+        "state": "RN",
+        "Deaths": 7,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.19960916525443181
+      },
+      {
+        "Day": 3,
+        "state": "RN",
+        "Deaths": 8,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.22812476029077922
+      },
+      {
+        "Day": 4,
+        "state": "RN",
+        "Deaths": 11,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.31367154539982145
+      },
+      {
+        "Day": 5,
+        "state": "RN",
+        "Deaths": 11,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.31367154539982145
+      },
+      {
+        "Day": 6,
+        "state": "RN",
+        "Deaths": 11,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.31367154539982145
+      },
+      {
+        "Day": 7,
+        "state": "RN",
+        "Deaths": 13,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.37070273547251625
+      },
+      {
+        "Day": 8,
+        "state": "RN",
+        "Deaths": 17,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.4847651156179058
+      },
+      {
+        "Day": 9,
+        "state": "RN",
+        "Deaths": 18,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.5132807106542533
+      },
+      {
+        "Day": 10,
+        "state": "RN",
+        "Deaths": 19,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.5417963056906007
+      },
+      {
+        "Day": 11,
+        "state": "RN",
+        "Deaths": 20,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.570311900726948
+      },
+      {
+        "Day": 12,
+        "state": "RN",
+        "Deaths": 23,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.6558586858359903
+      },
+      {
+        "Day": 13,
+        "state": "RN",
+        "Deaths": 24,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.6843742808723376
+      },
+      {
+        "Day": 14,
+        "state": "RN",
+        "Deaths": 26,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.7414054709450325
+      },
+      {
+        "Day": 15,
+        "state": "RN",
+        "Deaths": 27,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.7699210659813799
+      },
+      {
+        "Day": 16,
+        "state": "RN",
+        "Deaths": 28,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.7984366610177273
+      },
+      {
+        "Day": 17,
+        "state": "RN",
+        "Deaths": 29,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.8269522560540747
+      },
+      {
+        "Day": 18,
+        "state": "RN",
+        "Deaths": 34,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 0.9695302312358116
+      },
+      {
+        "Day": 19,
+        "state": "RN",
+        "Deaths": 38,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 1.0835926113812013
+      },
+      {
+        "Day": 20,
+        "state": "RN",
+        "Deaths": 40,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 1.140623801453896
+      },
+      {
+        "Day": 21,
+        "state": "RN",
+        "Deaths": 44,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 1.2546861815992858
+      },
+      {
+        "Day": 22,
+        "state": "RN",
+        "Deaths": 45,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 1.2832017766356332
+      },
+      {
+        "Day": 23,
+        "state": "RN",
+        "Deaths": 48,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 1.3687485617446753
+      },
+      {
+        "Day": 24,
+        "state": "RN",
+        "Deaths": 54,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 3506853,
+        "DeathPop": 1.5398421319627598
+      },
+      {
+        "Day": 0,
+        "state": "RO",
+        "Deaths": 5,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.28133747837218137
+      },
+      {
+        "Day": 1,
+        "state": "RO",
+        "Deaths": 5,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.28133747837218137
+      },
+      {
+        "Day": 2,
+        "state": "RO",
+        "Deaths": 5,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.28133747837218137
+      },
+      {
+        "Day": 3,
+        "state": "RO",
+        "Deaths": 6,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.33760497404661766
+      },
+      {
+        "Day": 4,
+        "state": "RO",
+        "Deaths": 7,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.3938724697210539
+      },
+      {
+        "Day": 5,
+        "state": "RO",
+        "Deaths": 10,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.5626749567443627
+      },
+      {
+        "Day": 6,
+        "state": "RO",
+        "Deaths": 10,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.5626749567443627
+      },
+      {
+        "Day": 7,
+        "state": "RO",
+        "Deaths": 11,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 1777225,
+        "DeathPop": 0.618942452418799
+      },
+      {
+        "Day": 0,
+        "state": "RS",
+        "Deaths": 5,
+        "Date": "2020-04-01T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.04394739356358779
+      },
+      {
+        "Day": 1,
+        "state": "RS",
+        "Deaths": 5,
+        "Date": "2020-04-02T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.04394739356358779
+      },
+      {
+        "Day": 2,
+        "state": "RS",
+        "Deaths": 6,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.05273687227630535
+      },
+      {
+        "Day": 3,
+        "state": "RS",
+        "Deaths": 7,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.06152635098902291
+      },
+      {
+        "Day": 4,
+        "state": "RS",
+        "Deaths": 7,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.06152635098902291
+      },
+      {
+        "Day": 5,
+        "state": "RS",
+        "Deaths": 8,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.07031582970174047
+      },
+      {
+        "Day": 6,
+        "state": "RS",
+        "Deaths": 8,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.07031582970174047
+      },
+      {
+        "Day": 7,
+        "state": "RS",
+        "Deaths": 10,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.08789478712717558
+      },
+      {
+        "Day": 8,
+        "state": "RS",
+        "Deaths": 14,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.12305270197804583
+      },
+      {
+        "Day": 9,
+        "state": "RS",
+        "Deaths": 15,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.13184218069076337
+      },
+      {
+        "Day": 10,
+        "state": "RS",
+        "Deaths": 16,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.14063165940348094
+      },
+      {
+        "Day": 11,
+        "state": "RS",
+        "Deaths": 16,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.14063165940348094
+      },
+      {
+        "Day": 12,
+        "state": "RS",
+        "Deaths": 17,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.1494211381161985
+      },
+      {
+        "Day": 13,
+        "state": "RS",
+        "Deaths": 18,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.15821061682891605
+      },
+      {
+        "Day": 14,
+        "state": "RS",
+        "Deaths": 19,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.16700009554163361
+      },
+      {
+        "Day": 15,
+        "state": "RS",
+        "Deaths": 21,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.18457905296706872
+      },
+      {
+        "Day": 16,
+        "state": "RS",
+        "Deaths": 24,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.2109474891052214
+      },
+      {
+        "Day": 17,
+        "state": "RS",
+        "Deaths": 24,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.2109474891052214
+      },
+      {
+        "Day": 18,
+        "state": "RS",
+        "Deaths": 26,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.2285264465306565
+      },
+      {
+        "Day": 19,
+        "state": "RS",
+        "Deaths": 27,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.23731592524337405
+      },
+      {
+        "Day": 20,
+        "state": "RS",
+        "Deaths": 27,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.23731592524337405
+      },
+      {
+        "Day": 21,
+        "state": "RS",
+        "Deaths": 28,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.24610540395609165
+      },
+      {
+        "Day": 22,
+        "state": "RS",
+        "Deaths": 29,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.2548948826688092
+      },
+      {
+        "Day": 23,
+        "state": "RS",
+        "Deaths": 34,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.298842276232397
+      },
+      {
+        "Day": 24,
+        "state": "RS",
+        "Deaths": 35,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.3076317549451146
+      },
+      {
+        "Day": 25,
+        "state": "RS",
+        "Deaths": 38,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.33400019108326723
+      },
+      {
+        "Day": 26,
+        "state": "RS",
+        "Deaths": 45,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.39552654207229015
+      },
+      {
+        "Day": 27,
+        "state": "RS",
+        "Deaths": 49,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 11377239,
+        "DeathPop": 0.4306844569231604
+      },
+      {
+        "Day": 0,
+        "state": "SC",
+        "Deaths": 5,
+        "Date": "2020-04-02T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.0697857354607003
+      },
+      {
+        "Day": 1,
+        "state": "SC",
+        "Deaths": 5,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.0697857354607003
+      },
+      {
+        "Day": 2,
+        "state": "SC",
+        "Deaths": 10,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.1395714709214006
+      },
+      {
+        "Day": 3,
+        "state": "SC",
+        "Deaths": 10,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.1395714709214006
+      },
+      {
+        "Day": 4,
+        "state": "SC",
+        "Deaths": 11,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.15352861801354067
+      },
+      {
+        "Day": 5,
+        "state": "SC",
+        "Deaths": 15,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.20935720638210092
+      },
+      {
+        "Day": 6,
+        "state": "SC",
+        "Deaths": 17,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.23727150056638102
+      },
+      {
+        "Day": 7,
+        "state": "SC",
+        "Deaths": 18,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.2512286476585211
+      },
+      {
+        "Day": 8,
+        "state": "SC",
+        "Deaths": 18,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.2512286476585211
+      },
+      {
+        "Day": 9,
+        "state": "SC",
+        "Deaths": 21,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.29310008893494127
+      },
+      {
+        "Day": 10,
+        "state": "SC",
+        "Deaths": 24,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.33497153021136145
+      },
+      {
+        "Day": 11,
+        "state": "SC",
+        "Deaths": 26,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.3628858243956416
+      },
+      {
+        "Day": 12,
+        "state": "SC",
+        "Deaths": 28,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.3908001185799217
+      },
+      {
+        "Day": 13,
+        "state": "SC",
+        "Deaths": 29,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.4047572656720617
+      },
+      {
+        "Day": 14,
+        "state": "SC",
+        "Deaths": 30,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.41871441276420185
+      },
+      {
+        "Day": 15,
+        "state": "SC",
+        "Deaths": 31,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.43267155985634187
+      },
+      {
+        "Day": 16,
+        "state": "SC",
+        "Deaths": 32,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.4466287069484819
+      },
+      {
+        "Day": 17,
+        "state": "SC",
+        "Deaths": 35,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.48850014822490206
+      },
+      {
+        "Day": 18,
+        "state": "SC",
+        "Deaths": 35,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.48850014822490206
+      },
+      {
+        "Day": 19,
+        "state": "SC",
+        "Deaths": 37,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.5164144424091822
+      },
+      {
+        "Day": 20,
+        "state": "SC",
+        "Deaths": 39,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.5443287365934624
+      },
+      {
+        "Day": 21,
+        "state": "SC",
+        "Deaths": 42,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.5862001778698825
+      },
+      {
+        "Day": 22,
+        "state": "SC",
+        "Deaths": 42,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.5862001778698825
+      },
+      {
+        "Day": 23,
+        "state": "SC",
+        "Deaths": 42,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.5862001778698825
+      },
+      {
+        "Day": 24,
+        "state": "SC",
+        "Deaths": 43,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.6001573249620227
+      },
+      {
+        "Day": 25,
+        "state": "SC",
+        "Deaths": 44,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.6141144720541627
+      },
+      {
+        "Day": 26,
+        "state": "SC",
+        "Deaths": 44,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 7164788,
+        "DeathPop": 0.6141144720541627
+      },
+      {
+        "Day": 0,
+        "state": "SE",
+        "Deaths": 5,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.21751462568343094
+      },
+      {
+        "Day": 1,
+        "state": "SE",
+        "Deaths": 5,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.21751462568343094
+      },
+      {
+        "Day": 2,
+        "state": "SE",
+        "Deaths": 5,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.21751462568343094
+      },
+      {
+        "Day": 3,
+        "state": "SE",
+        "Deaths": 7,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.30452047595680337
+      },
+      {
+        "Day": 4,
+        "state": "SE",
+        "Deaths": 7,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.30452047595680337
+      },
+      {
+        "Day": 5,
+        "state": "SE",
+        "Deaths": 8,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.34802340109348956
+      },
+      {
+        "Day": 6,
+        "state": "SE",
+        "Deaths": 8,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.34802340109348956
+      },
+      {
+        "Day": 7,
+        "state": "SE",
+        "Deaths": 9,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.39152632623017575
+      },
+      {
+        "Day": 8,
+        "state": "SE",
+        "Deaths": 9,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.39152632623017575
+      },
+      {
+        "Day": 9,
+        "state": "SE",
+        "Deaths": 11,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.4785321765035481
+      },
+      {
+        "Day": 10,
+        "state": "SE",
+        "Deaths": 11,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 2298696,
+        "DeathPop": 0.4785321765035481
+      },
+      {
+        "Day": 0,
+        "state": "SP",
+        "Deaths": 5,
+        "Date": "2020-03-19T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.010888727246942767
+      },
+      {
+        "Day": 1,
+        "state": "SP",
+        "Deaths": 9,
+        "Date": "2020-03-20T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.01959970904449698
+      },
+      {
+        "Day": 2,
+        "state": "SP",
+        "Deaths": 15,
+        "Date": "2020-03-21T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.032666181740828304
+      },
+      {
+        "Day": 3,
+        "state": "SP",
+        "Deaths": 22,
+        "Date": "2020-03-22T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.047910399886548174
+      },
+      {
+        "Day": 4,
+        "state": "SP",
+        "Deaths": 30,
+        "Date": "2020-03-23T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.06533236348165661
+      },
+      {
+        "Day": 5,
+        "state": "SP",
+        "Deaths": 40,
+        "Date": "2020-03-24T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.08710981797554214
+      },
+      {
+        "Day": 6,
+        "state": "SP",
+        "Deaths": 48,
+        "Date": "2020-03-25T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.10453178157065056
+      },
+      {
+        "Day": 7,
+        "state": "SP",
+        "Deaths": 58,
+        "Date": "2020-03-26T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.1263092360645361
+      },
+      {
+        "Day": 8,
+        "state": "SP",
+        "Deaths": 68,
+        "Date": "2020-03-27T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.1480866905584216
+      },
+      {
+        "Day": 9,
+        "state": "SP",
+        "Deaths": 84,
+        "Date": "2020-03-28T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.18293061774863847
+      },
+      {
+        "Day": 10,
+        "state": "SP",
+        "Deaths": 98,
+        "Date": "2020-03-29T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.21341905404007824
+      },
+      {
+        "Day": 11,
+        "state": "SP",
+        "Deaths": 113,
+        "Date": "2020-03-30T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.24608523578090655
+      },
+      {
+        "Day": 12,
+        "state": "SP",
+        "Deaths": 136,
+        "Date": "2020-03-31T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.2961733811168432
+      },
+      {
+        "Day": 13,
+        "state": "SP",
+        "Deaths": 164,
+        "Date": "2020-04-01T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.35715025369972275
+      },
+      {
+        "Day": 14,
+        "state": "SP",
+        "Deaths": 188,
+        "Date": "2020-04-02T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.40941614448504804
+      },
+      {
+        "Day": 15,
+        "state": "SP",
+        "Deaths": 219,
+        "Date": "2020-04-03T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.4769262534160932
+      },
+      {
+        "Day": 16,
+        "state": "SP",
+        "Deaths": 260,
+        "Date": "2020-04-04T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.5662138168410238
+      },
+      {
+        "Day": 17,
+        "state": "SP",
+        "Deaths": 275,
+        "Date": "2020-04-05T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.5988799985818521
+      },
+      {
+        "Day": 18,
+        "state": "SP",
+        "Deaths": 304,
+        "Date": "2020-04-06T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.6620346166141202
+      },
+      {
+        "Day": 19,
+        "state": "SP",
+        "Deaths": 371,
+        "Date": "2020-04-07T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.8079435617231533
+      },
+      {
+        "Day": 20,
+        "state": "SP",
+        "Deaths": 428,
+        "Date": "2020-04-08T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 0.9320750523383009
+      },
+      {
+        "Day": 21,
+        "state": "SP",
+        "Deaths": 496,
+        "Date": "2020-04-09T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.0801617428967223
+      },
+      {
+        "Day": 22,
+        "state": "SP",
+        "Deaths": 540,
+        "Date": "2020-04-10T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.1759825426698187
+      },
+      {
+        "Day": 23,
+        "state": "SP",
+        "Deaths": 560,
+        "Date": "2020-04-11T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.2195374516575899
+      },
+      {
+        "Day": 24,
+        "state": "SP",
+        "Deaths": 588,
+        "Date": "2020-04-12T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.2805143242404693
+      },
+      {
+        "Day": 25,
+        "state": "SP",
+        "Deaths": 608,
+        "Date": "2020-04-13T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.3240692332282404
+      },
+      {
+        "Day": 26,
+        "state": "SP",
+        "Deaths": 695,
+        "Date": "2020-04-14T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.5135330873250445
+      },
+      {
+        "Day": 27,
+        "state": "SP",
+        "Deaths": 778,
+        "Date": "2020-04-15T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.6942859596242945
+      },
+      {
+        "Day": 28,
+        "state": "SP",
+        "Deaths": 853,
+        "Date": "2020-04-16T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 1.8576168683284362
+      },
+      {
+        "Day": 29,
+        "state": "SP",
+        "Deaths": 928,
+        "Date": "2020-04-17T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 2.0209477770325774
+      },
+      {
+        "Day": 30,
+        "state": "SP",
+        "Deaths": 991,
+        "Date": "2020-04-18T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 2.158145740344056
+      },
+      {
+        "Day": 31,
+        "state": "SP",
+        "Deaths": 1015,
+        "Date": "2020-04-19T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 2.2104116311293813
+      },
+      {
+        "Day": 32,
+        "state": "SP",
+        "Deaths": 1037,
+        "Date": "2020-04-20T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 2.2583220310159295
+      },
+      {
+        "Day": 33,
+        "state": "SP",
+        "Deaths": 1093,
+        "Date": "2020-04-21T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 2.380275776181689
+      },
+      {
+        "Day": 34,
+        "state": "SP",
+        "Deaths": 1134,
+        "Date": "2020-04-22T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 2.4695633396066192
+      },
+      {
+        "Day": 35,
+        "state": "SP",
+        "Deaths": 1345,
+        "Date": "2020-04-23T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 2.929067629427604
+      },
+      {
+        "Day": 36,
+        "state": "SP",
+        "Deaths": 1512,
+        "Date": "2020-04-24T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 3.2927511194754926
+      },
+      {
+        "Day": 37,
+        "state": "SP",
+        "Deaths": 1667,
+        "Date": "2020-04-25T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 3.630301664130718
+      },
+      {
+        "Day": 38,
+        "state": "SP",
+        "Deaths": 1700,
+        "Date": "2020-04-26T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 3.7021672639605407
+      },
+      {
+        "Day": 39,
+        "state": "SP",
+        "Deaths": 1825,
+        "Date": "2020-04-27T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 3.97438544513411
+      },
+      {
+        "Day": 40,
+        "state": "SP",
+        "Deaths": 2049,
+        "Date": "2020-04-28T00:00:00",
+        "estimated_population_2019": 45919049,
+        "DeathPop": 4.462200425797146
+      }
+    ],
+    "data-bf3a284e2fbb064d7dde36f27f5d5a49": [{"x": 13, "y": 500}],
+    "data-91a6abd35c00440d3f0d2923267a6aad": [{"x": 28, "y": 250}],
+    "data-05f954e2ff594c6e76a66044f332be7c": [{"x": 36, "y": 65}]
+  }
+}
+```
