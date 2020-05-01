@@ -56,7 +56,7 @@ Para atualizar o gráfico:
 -->
 
 
-```vega-lite
+```vega
 {
   "$schema": "visualization.vl.json",
 }
