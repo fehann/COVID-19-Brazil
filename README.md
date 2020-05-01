@@ -54,10 +54,3 @@ Para atualizar o gráfico:
 @[vega](visualization.vl.json)
 
 -->
-
-
-```vega
-{
-  "$schema": "visualization.vl.json",
-}
-```
