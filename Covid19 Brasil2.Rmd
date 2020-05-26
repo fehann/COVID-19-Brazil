@@ -1,0 +1,170 @@
+---
+title: "Covid19 - EstadosBrasileiros"
+author: "Fernando Hannaka"
+date: "26/05/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = 'hide', warning = FALSE, message = FALSE)
+```
+
+## Visualização de dados relacionados ao COVID-19 no Brasil
+
+```{r libraries, echo=FALSE}
+
+# Load libraries
+#install.packages("remotes")
+#install.packages("expss")
+#install.packages("zoo")
+#install.packages("directlabels")
+#install.packages("tidyverse")
+#install.packages("plotly")
+#remotes::install_github("liibre/coronabr")
+
+library(coronabr)
+library(tidyverse)
+library(expss)
+library(zoo)
+library(directlabels)
+library(plotly)
+
+```
+Visando entender o comportamento da evolução da COVID-19 no Brasil, esta página apresenta o ritmo de aceleração ou desaceleração da doença por estado brasileiro. A inspiração para criação desta visualização veio a partir do gráfico publicado pela organização [Our World in Data](https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death) que tem como objetivo apresentar não somente o número de casos mas também o ritmo no qual as morte estão ocorrendo.
+
+## Sobre os dados
+
+```{r data, echo=FALSE}
+
+# Get data
+dados <- get_corona_br(by_uf = TRUE)
+
+# Create table with date that 5th death occured
+
+date5thdeath <- setNames(data.frame(matrix(ncol = 2, nrow = 27)), c("state", "date5thdeath"))
+date5thdeath$state <- as.factor(unique(dados$state))
+date5thdeath$date5thdeath <- as.Date(date5thdeath$date5thdeath)
+rownames(date5thdeath) <- date5thdeath$state
+date5thdeath
+class(date5thdeath)
+
+for(i in date5thdeath$state){
+  df <- dados %>%
+    filter(state == i) %>%
+    mutate(fifthdeath = deaths/5)
+  date5thdeath[i,2] <- vlookup(min(df[df$fifthdeath > 1,]$fifthdeath), df, result_column = 1, lookup_column = 12)
+}
+
+date5thdeath
+
+dados2 <- merge(dados, date5thdeath, by = "state")
+
+dados2 <- mutate(dados2, datesince5thdeath = as.numeric(date - date5thdeath))
+
+```
+
+É importante salientar que esta visualização se baseia em dados disponibilizados pelas secretarias estaduais, coletados de forma manual uma vez que não há um banco de dados integrados, conforme site Brasil.io. São dados passível de erros e vieses portanto qualquer análise não deve ser baseada somente nestes dados e toda tomada de decisões deve considerar uma análise científica com informações complementares.
+
+## Número de mortes por estado brasileiro a partir da 5a morte notificada
+
+
+```{r plot, echo=FALSE, results="markup"}
+
+## Reference lines
+
+trace_0 = c(0, 5)
+for (i in 2:max(dados2$datesince5thdeath)) { 
+  if(5*2^(i/2) > max(dados2$deaths)) {
+    break
+  }
+  trace_0[3] = i
+  trace_0[4] = 5*2^(i/2)
+}
+
+trace_1 = c(0, 5)
+for (i in 2:max(dados2$datesince5thdeath)) { 
+  if(5*2^(i/5) > max(dados2$deaths)) {
+    break
+  }
+  trace_1[3] = i
+  trace_1[4] = 5*2^(i/5)
+}
+
+trace_2 = c(0, 5)
+for (i in 2:max(dados2$datesince5thdeath)) { 
+  if(5*2^(i/10) > max(dados2$deaths)) {
+    break
+  }
+  trace_2[3] = i
+  trace_2[4] = 5*2^(i/10)
+}
+
+
+## Plot
+
+dados2 %>%
+  filter(datesince5thdeath > -1, !is.na(date5thdeath), between(datesince5thdeath, 0, max(na.omit(datesince5thdeath))-2)) %>% # disregard last 2 observations and any NAs
+  plot_ly(x = ~datesince5thdeath, y = ~deaths, color = ~state, hoverinfo = "text", 
+          hovertext = ~paste("Estado: ", state, "<br>",
+                        "Mortes: ", deaths, "<br>",
+                        "Data: ", date)) %>%
+  add_lines() %>%
+  add_markers(marker = list(size = 3)) %>%
+  layout(xaxis = list(title = "Dias a partir da 5a morte no estado"),
+         yaxis = list(title = "Mortes confirmadas (escala logarítmica)", type = "log"),
+         title = "Total de mortes confirmadas pelo COVID-19 por estado brasileiro",
+         showlegend = FALSE) %>%
+  add_segments(x = trace_0[1], xend = trace_0[3], y = trace_0[2], yend = trace_0[4], line = list(width=0.5, dash="dot", color = 'rgba(211,211,211,1)')) %>% # double every 2 days
+  add_segments(x = trace_1[1], xend = trace_1[3], y = trace_1[2], yend = trace_1[4], line = list(width=0.5, dash="dot", color = 'rgba(211,211,211,1)')) %>% # every 5 days
+  add_segments(x = trace_2[1], xend = trace_2[3], y = trace_2[2], yend = trace_2[4], line = list(width=0.5, dash="dot", color = 'rgba(211,211,211,1)')) %>% # every 10 days
+  add_annotations(x = summarise(group_by(dados2, state), max = max(datesince5thdeath))$max,
+                y = log10(summarise(group_by(filter(dados2, datesince5thdeath <= max(datesince5thdeath)-2), state), max = max(deaths))$max),
+                text = summarise(group_by(dados2, state), max = max(datesince5thdeath)-2)$state,
+                xref = "x",
+                yref = "y",
+                showarrow = FALSE,
+                xanchor = 'left',
+                yanchor = 'middle') %>%
+  add_annotations(x = c(trace_0[3], trace_1[3], trace_2[3]),
+                  y = log10(c(trace_0[4], trace_1[4], trace_2[4])),
+                  text = c("mortes duplicam a cada 2 dias", "a cada 5 dias", "a cada 10 dias"),
+                  xref = "x",
+                  yref = "y",
+                  showarrow = FALSE,
+                  font = list(family = 'Arial',
+                              size = 10,
+                              color = 'rgba(211,211,211,1)'),
+                  xanchor = 'left',
+                  yanchor = 'middle')
+  
+```
+
+## Considerações
+
+O único tratamento nos dados originais foi o preenchimento dos números faltantes, provavelmente devido à falta de disponibilidade de informação oficial pela secretaria em um determinado dia, porém não acontece com frequência. Os dados pendentes foram preenchidos com o mesmo número total de mortes válido antes daquele dia para aquele estado. Normalmente esta lacuna ocorre nos dias mais recentes portanto, para fins de visualização, não foram considerados os últimos 2 dias. Como o intuito deste gráfico é mostrar a tendência é importante termos os dados completos para não tirarmos conclusões precipitadas.
+
+## Referências
+
+[Brasil.io](https://brasil.io/dataset/covid19/caso)
+
+[Our World in Data](https://ourworldindata.org/grapher/covid-confirmed-deaths-since-5th-death)
+
+[DataCamp Live Coding: Covid-19 Exploratory Data Analysis](https://www.facebook.com/726282547396228/videos/861466570947781/)
+
+[Doubling time](https://en.wikipedia.org/wiki/Doubling_time)
+
+[How coronavirus charts can mislead us](https://www.youtube.com/watch?v=O-3Mlj3MQ_Q&feature=share)
+
+***
+
+Atualizado em: 26/05/2020
+
+Agradeço a contribuição da Flavia Boechat para construir esta visualização em R.
+
+Versão em Python pode ser acessada aqui: <https://fehann.github.io/COVID-19-Brazil/>.
+
+Em caso de dúvidas, comentários ou sugestões podem entrar em contato através do [LinkedIn](https://www.linkedin.com/posts/activity-6657331106443993088-V7Lm).
+
+Cuidem da saúde e da familia, colaborando vamos sair desta situação o mais breve possível.
+
+
