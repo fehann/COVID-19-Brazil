@@ -23,4 +23,6 @@ st.dataframe(data)
 
 
 
-pipenv install streamlit numpy pandas matplotlib seaborn datadotworld altair datetime 'click==7.1.2'
+pipenv install streamlit numpy pandas matplotlib seaborn datadotworld altair datetime 'click==7.1.2' or 6.7
+pipenv shell
+pipenv run pip freeze > requirements.txt
