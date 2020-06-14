@@ -20,3 +20,7 @@ Does this work?
 data = dw.load_dataset('fehann/brasil-io-covid19')
 
 st.dataframe(data)
+
+
+
+pipenv install streamlit numpy pandas matplotlib seaborn datadotworld altair datetime 'click==7.1.2'
