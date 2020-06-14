@@ -21,6 +21,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import streamlit as st
+
 # Set style & figures inline
 sns.set()
 # %matplotlib inline
@@ -406,3 +408,5 @@ alt.hconcat(chart1, chart2
 ).add_selection(
   selection
 )
+
+st.write(chart1)
