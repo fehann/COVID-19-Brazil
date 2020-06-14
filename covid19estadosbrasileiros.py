@@ -310,6 +310,7 @@ chartA = alt.layer(chart, overlay, text, double2, double5, double10, text2, text
 
 ## Número de mortes por estado brasileiro a partir da 5a morte notificada
 
+Nesta visualização não estão aparecendo as legendas das linhas de referências em cinza, são elas da esquerda para a direita: mortes a cada 2 dias, a cada 5 dias e a cada 10 dias respectivamente. Na [página estática](https://fehann.github.io/COVID-19-Brazil/) estas legendas estão aparecendo caso queira consultar.
 """
 
 st.write(chartA)
@@ -389,6 +390,7 @@ O único tratamento nos dados originais foi o preenchimento dos números faltant
 ---
 
 - *O código original para geração desta visualização pode ser acessado aqui: [Python](https://github.com/fehann/COVID-19-Brazil/blob/master/Covid19EstadosBrasileiros.py).*
+- *A página estática pode ser acessada [aqui](https://fehann.github.io/COVID-19-Brazil/).*
 - *A versão em R desta visualização pode ser acessada aqui: [RPubs](https://rpubs.com/fehann/covid19brasil).*
 - *Em caso de dúvidas, comentários ou sugestões podem entrar em contato através do [LinkedIn](https://www.linkedin.com/posts/activity-6657331106443993088-V7Lm).*
 - *Cuidem da saúde e da familia, colaborando vamos sair desta situação o mais breve possível.*
